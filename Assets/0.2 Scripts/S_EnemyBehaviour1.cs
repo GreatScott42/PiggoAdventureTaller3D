@@ -20,8 +20,6 @@ public class S_EnemyBehaviour1 : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-            GetDamage(5);
 
         if (temp > 0)
         {
@@ -39,7 +37,7 @@ public class S_EnemyBehaviour1 : MonoBehaviour
     private void Movement()
     {
         rb.velocity = new Vector3(stats.speed, 0, 0);
-        Debug.Log(new Vector3(stats.speed * Time.deltaTime, 0, 0) + "  " + rb.velocity);
+        //Debug.Log(new Vector3(stats.speed * Time.deltaTime, 0, 0) + "  " + rb.velocity);
     }
 
     private void GetDamage(int dmg)

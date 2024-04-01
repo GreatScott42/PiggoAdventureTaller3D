@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5050927521215366130}
   - component: {fileID: 3834501691420010985}
   m_Layer: 0
-  m_Name: Enemigo 1
+  m_Name: Preb_Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 10
-  speed: 1
+  speed: 2
 --- !u!114 &5050927521215366130
 MonoBehaviour:
   m_ObjectHideFlags: 0
