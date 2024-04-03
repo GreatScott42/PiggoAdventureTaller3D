@@ -5,28 +5,54 @@ using UnityEngine;
 public class scr : MonoBehaviour
 {
     // Start is called before the first frame update
-    Quaternion ogrot;
-    Animator animator;
 
+    //pivote de donde gira el arma, es un cubito chico dentro del jugador
+    public GameObject pivot;
+    //rotacion original del arma para despues de atacar volverla a la misma
+    Quaternion ogrot;
+    //posicion original //   //
+    Vector3 ogpos;
+    //animador para mover el arma, obsoleto
+    Animator animator;
+    //bool para mover el arma al hacer clic izquierdo
+    bool atacando;
     void Start()
     {
-        ogrot = transform.rotation;
+        atacando = false;
+        ogrot = transform.localRotation;//new Vector3 (-2, -41, -61);
+        ogpos = transform.localPosition;//new Vector3(0.9f, 0.3f, 0.3f);
         animator = GetComponent<Animator>();
-        
+
     }
 
-    // Update is called once per frame
+    // Update is called once per framed
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        //si se hizo clic el arma se rotara alrededor del pivote
+        if( atacando ){
+            transform.RotateAround(pivot.transform.position, Vector3.down, 250f * Time.deltaTime);
+        }
+        //clic izquierdo
+        if (Input.GetMouseButtonDown(0))
         {
+            StartCoroutine(ataque());
             //transform.RotateAround(transform.parent.transform.position, Vector3.down, 50f);
-            animator.SetBool("ataque", true);
+            //animator.SetBool("ataque", true);
         }
         else
         {
             //transform.rotation = ogrot;
-            animator.SetBool("ataque", false);
+            //animator.SetBool("ataque", false);
         }
+    }
+
+    //al hacer clic izquierdo por 0.5 segundos se rotara el arma y luego se reiniciaran su posicion y rotacion inicial
+    IEnumerator ataque()
+    {
+        atacando = true;
+        yield return new WaitForSeconds(0.5f);
+        transform.localRotation = ogrot;
+        transform.localPosition = ogpos;
+        atacando = false;
     }
 }
