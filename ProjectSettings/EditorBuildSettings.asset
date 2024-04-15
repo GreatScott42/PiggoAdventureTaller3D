@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/0.1 Escenas/Sc_EscenaExploracion.unity
+    guid: 00214429335916d439f106073e546b97
+  - enabled: 1
+    path: Assets/0.1 Escenas/Sc_PantallaCombate.unity
+    guid: b7106fe3a6742ce488f90bedee750612
+  - enabled: 1
+    path: Assets/0.1 Escenas/Sc_JoJoTest.unity
+    guid: c510ec2565693164b8d558845f36b835
   m_configObjects: {}

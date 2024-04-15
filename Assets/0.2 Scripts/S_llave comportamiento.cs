@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class llavecomportamiento : MonoBehaviour
+public class S_llavecomportamiento : MonoBehaviour
 {
     public GameObject Objetollave;
     public GameObject ColliderPuerta;
