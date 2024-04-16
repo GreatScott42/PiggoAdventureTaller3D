@@ -7,12 +7,10 @@ public class S_MovPlayerComb : MonoBehaviour
     // Start is called before the first frame update
     public float speed = 5f;
     private Vector3 moveDirection;
-    private float fixedY;
     private Rigidbody rb;
 
     void Start()
     {
-        fixedY = 45f;
         rb = GetComponent<Rigidbody>();
     }
 
