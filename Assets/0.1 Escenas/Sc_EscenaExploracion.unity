@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda6e13c7a9427b41a8849fcb392ec6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Sc_JoJoTest
+  sceneName: Sc_PantallaCombate
 --- !u!23 &690053417
 MeshRenderer:
   m_ObjectHideFlags: 0
