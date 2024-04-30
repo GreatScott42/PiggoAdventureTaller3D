@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class scr : MonoBehaviour
+public class S_scr : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] int dmg = 5;
 
     //pivote de donde gira el arma, es un cubito chico dentro del jugador
     public GameObject pivot;
@@ -38,7 +38,7 @@ public class scr : MonoBehaviour
     void Update()
     {
         //si se hizo clic el arma se rotara alrededor del pivote
-        if( atacando ){
+        if (atacando) {
             transform.RotateAround(pivot.transform.position, Vector3.down, 250f * Time.deltaTime);
         }
         //clic izquierdo
@@ -67,5 +67,13 @@ public class scr : MonoBehaviour
         transform.localRotation = ogrot;
         transform.localPosition = ogpos;
         atacando = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            other.SendMessage("GetDamage", dmg);
+        }
     }
 }
