@@ -25,7 +25,6 @@ public class S_MovPlayerComb : MonoBehaviour
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized;
         float actualSpeed = Time.deltaTime * speed;
         rb.MovePosition(transform.position + new Vector3(moveDirection.x * actualSpeed, 0, moveDirection.z * actualSpeed));
-        print(rb.velocity);
     }
 
 
