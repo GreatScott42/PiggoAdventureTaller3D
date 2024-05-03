@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//enemigo 2, ataca con dash
 public class S_EnemyBehaviour2 : MonoBehaviour
 {
     S_EnemyStats stats;
@@ -9,11 +10,13 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     GameObject target;
     Color ogcolor;
 
+    
+    // el temptime se cambio a 3, para que ataque mas seguido
     public float tempTime = 3;
     [SerializeField] float temp;
 
     private void Start()
-    {
+    {        
         ogcolor = GetComponent<MeshRenderer>().material.color;
         target = GameObject.Find("Jugador");
         stats = GetComponent<S_EnemyStats>();
