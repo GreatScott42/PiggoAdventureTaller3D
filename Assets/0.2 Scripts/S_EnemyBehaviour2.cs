@@ -16,7 +16,7 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     [SerializeField] float temp;
 
     private void Start()
-    {        
+    {                        
         ogcolor = GetComponent<MeshRenderer>().material.color;
         target = GameObject.Find("Jugador");
         stats = GetComponent<S_EnemyStats>();
@@ -55,7 +55,7 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     }
     private void DashAttack()
     {
-        rb.AddForce((target.transform.position-transform.position).normalized*600,ForceMode.Force);                
+        rb.AddForce((target.transform.position-transform.position).normalized*stats.speed,ForceMode.Force);                
     }
 
     private void GetDamage(int dmg)
