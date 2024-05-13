@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class S_EnemyBehaviour1 : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class S_EnemyBehaviour1 : MonoBehaviour
             Vector3 positionSquare = (player.transform.position - transform.position); 
             positionSquare.Normalize();
             sensor.transform.localPosition = new Vector3(Mathf.Abs(sensorPosition.x) * positionSquare.x, 0,0);
-            print("VectorSquare:" + positionSquare + "\n" + "NewPosition: " + sensor.transform.position);
+            //print("VectorSquare:" + positionSquare + "\n" + "NewPosition: " + sensor.transform.position);
             sensor.SetActive(true);
         }
 
@@ -54,7 +55,6 @@ public class S_EnemyBehaviour1 : MonoBehaviour
     private void FixedUpdate()
     {
         distancePlayer = Vector3.Distance(transform.position,player.transform.position);
-        
         if(!stats.canMove)
         {
             rb.velocity = Vector3.zero;
@@ -69,6 +69,7 @@ public class S_EnemyBehaviour1 : MonoBehaviour
         else
         {
             Movement();
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z)), 1);
         }
     }
 

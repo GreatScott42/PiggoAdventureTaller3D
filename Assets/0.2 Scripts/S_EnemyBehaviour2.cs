@@ -7,20 +7,23 @@ public class S_EnemyBehaviour2 : MonoBehaviour
 {
     S_EnemyStats stats;
     Rigidbody rb;
+    Collider col;
     GameObject target;
     Color ogcolor;
 
-    
+        
     // el temptime se cambio a 3, para que ataque mas seguido
     public float tempTime = 3;
     [SerializeField] float temp;
+    [SerializeField] float JumpForce;
 
     private void Start()
     {                        
         ogcolor = GetComponent<MeshRenderer>().material.color;
-        target = GameObject.Find("Jugador");
+        target = GameObject.FindGameObjectWithTag("Player");
         stats = GetComponent<S_EnemyStats>();
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
 
         temp = 0;
     }
@@ -32,7 +35,7 @@ public class S_EnemyBehaviour2 : MonoBehaviour
         {
             temp -= Time.deltaTime;
             GetComponent<MeshRenderer>().material.color = ogcolor;
-            transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(target.transform.position-transform.position),1);
+            transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(new Vector3(target.transform.position.x - transform.position.x, 0, target.transform.position.z - transform.position.z)),1);
         }
         
         else
@@ -55,7 +58,8 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     }
     private void DashAttack()
     {
-        rb.AddForce((target.transform.position-transform.position).normalized*stats.speed,ForceMode.Force);                
+        Vector3 dashForce= new Vector3(target.transform.position.x - transform.position.x,JumpForce, target.transform.position.z - transform.position.z);
+        rb.AddForce(dashForce.normalized*stats.speed,ForceMode.Force);                
     }
 
     private void GetDamage(int dmg)
@@ -69,6 +73,14 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     private void DeadSelf()
     {
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            rb.velocity = new Vector3(0f, rb.velocity.y,0f);
+        }
     }
 
 }
