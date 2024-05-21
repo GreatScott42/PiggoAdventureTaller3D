@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
 public class S_EnemyBehaviour1 : MonoBehaviour
 {
     S_EnemyStats stats;
     Rigidbody rb;
+    Color Colormain;
+    MeshRenderer meshren;
 
-    GameObject player;
+    //Datos del sensor
     public GameObject sensor;
-
     private Vector3 sensorPosition;
 
+    //Datos de stats edibles
     public float attackTime = 5;
     public float invencibleTime = 5;
 
+    //Variables relacionadas con la detección del jugador
+    GameObject player;
     public float rangeDamage = 5;
     [SerializeField] private float distancePlayer;
 
@@ -23,7 +28,9 @@ public class S_EnemyBehaviour1 : MonoBehaviour
     {
         stats = GetComponent<S_EnemyStats>();
         rb = GetComponent<Rigidbody>();
+        meshren = GetComponent<MeshRenderer>();
 
+        Colormain = meshren.material.color;
         player = GameObject.FindGameObjectWithTag("Player");
 
         sensorPosition = sensor.transform.localPosition;
@@ -38,11 +45,6 @@ public class S_EnemyBehaviour1 : MonoBehaviour
 
         if(stats.isAttack)
         {
-            //CAMBIAR ESTO MÁS ADELANTE
-            Vector3 positionSquare = (player.transform.position - transform.position); 
-            positionSquare.Normalize();
-            sensor.transform.localPosition = new Vector3(Mathf.Abs(sensorPosition.x) * positionSquare.x, 0,0);
-            //print("VectorSquare:" + positionSquare + "\n" + "NewPosition: " + sensor.transform.position);
             sensor.SetActive(true);
         }
 
@@ -50,6 +52,8 @@ public class S_EnemyBehaviour1 : MonoBehaviour
         {
             sensor.SetActive(false);
         }
+
+        GraphicsUpdate();
     }
 
     private void FixedUpdate()
@@ -72,6 +76,24 @@ public class S_EnemyBehaviour1 : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z)), 1);
         }
     }
+
+    private void GraphicsUpdate()
+    {
+        if (stats.isAttack)
+        {
+            meshren.material.color = Color.blue;
+            return;
+        }
+
+        if (stats.isInvulnerable)
+        {
+            meshren.material.color = new Color(1,0,1);
+            return;
+        }
+
+        meshren.material.color = Colormain;
+    }
+
 
     private void Movement()
     {
