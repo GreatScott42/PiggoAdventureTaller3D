@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class S_Movimientojugador : MonoBehaviour
+public class S_MovPlayerExpl : MonoBehaviour
 {
     public float speed = 1.0f;
     public float jumpForce = 1.0f;

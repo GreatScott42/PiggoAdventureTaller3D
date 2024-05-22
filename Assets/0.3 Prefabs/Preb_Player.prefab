@@ -13,11 +13,12 @@ GameObject:
   - component: {fileID: 9154300615470749617}
   - component: {fileID: 1235559250495664252}
   - component: {fileID: 4306545533738585870}
+  - component: {fileID: 7797480888023815085}
   - component: {fileID: 3937309109755644286}
-  - component: {fileID: 7881454613690290027}
+  - component: {fileID: 1444464660570255039}
   m_Layer: 0
   m_Name: Preb_Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 2938362544031743901}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.20412779, y: 2.01, z: 3.7821016}
+  m_LocalPosition: {x: 0.04, y: 1.5, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -137,6 +138,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &7797480888023815085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2938362544031743901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a2881623fafd84f81de30a562a4733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 5
+  DmgAtack: 2
+  Speed: 5
+  JumpForce: 5
+  canJump: 1
+  isJump: 0
+  canAttack: 1
+  isAttack: 0
+  canMove: 1
+  canDash: 0
 --- !u!114 &3937309109755644286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,30 +172,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7853ad30956d12a4a8b3d3cf86d82cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
---- !u!143 &7881454613690290027
-CharacterController:
+--- !u!114 &1444464660570255039
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2938362544031743901}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e1e845f011c3945b6e20c02522b84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
