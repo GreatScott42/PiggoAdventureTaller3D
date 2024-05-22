@@ -16,8 +16,17 @@ public class S_scr : MonoBehaviour
     Animator animator;
     //bool para mover el arma al hacer clic izquierdo
     bool atacando;
+
+
+    BoxCollider bc;
+    MeshRenderer mr;
+
     void Start()
     {
+        bc = GetComponent<BoxCollider>();
+        mr = GetComponent<MeshRenderer>();
+        bc.enabled = false;
+        mr.enabled = false;
         atacando = false;
         ogrot = transform.localRotation;//new Vector3 (-2, -41, -61);
         ogpos = transform.localPosition;//new Vector3(0.9f, 0.3f, 0.3f);
@@ -50,7 +59,11 @@ public class S_scr : MonoBehaviour
     IEnumerator ataque()
     {
         atacando = true;
+        mr.enabled = true;
+        bc.enabled = true;
         yield return new WaitForSeconds(0.5f);
+        bc.enabled = false;
+        mr.enabled = false;
         transform.localRotation = ogrot;
         transform.localPosition = ogpos;
         atacando = false;
