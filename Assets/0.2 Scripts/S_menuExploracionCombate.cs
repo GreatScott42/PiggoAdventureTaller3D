@@ -9,11 +9,13 @@ public class S_menuExploracionCombate : MonoBehaviour
 {
     //menu exploracion y combate
     public Button botonContinuar;
+    public Button botonMenu;
     public GameObject canvas;
     // Start is called before the first frame update
     void Start()
     {        
         botonContinuar.onClick.AddListener(continuar);
+        botonMenu.onClick.AddListener(menu);
     }
 
     // Update is called once per frame
@@ -25,5 +27,11 @@ public class S_menuExploracionCombate : MonoBehaviour
     {
         canvas.SetActive(false);
         Time.timeScale = 1.0f;
+    }
+    void menu()
+    {
+        canvas.SetActive(false);
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Sc_menuPrincipal");
     }
 }

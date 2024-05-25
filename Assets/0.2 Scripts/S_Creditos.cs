@@ -19,14 +19,15 @@ public class S_Creditos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (creditos.transform.position.y<altura)
+        creditos.transform.position = new Vector3(creditos.transform.position.x, creditos.transform.position.y + Time.deltaTime * 40, creditos.transform.position.z);
+        /*if (creditos.transform.position.y<altura)
         {
-            creditos.transform.position = new Vector3(creditos.transform.position.x,creditos.transform.position.y+Time.deltaTime*40,creditos.transform.position.z);
+            
         }
         else
         {
             creditos.transform.position = posInicial;
-        }
+        }*/
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("Sc_menuPrincipal");
