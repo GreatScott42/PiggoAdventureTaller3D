@@ -6,11 +6,12 @@ public class S_PlayerStats : MonoBehaviour
 {
     //Estadisticas Basicas
     public int life = 5;
-    public int DmgAtack = 2;
-    public float Speed = 5f;
-    public float JumpForce = 10f;
-    public float DashForce = 5f;
-    public float DashCoolDown = 0.4f;
+    public int dmgAtack = 2;
+    public float speed = 5f;
+    public float jumpForce = 10f;
+    public float dashForce = 5f;
+    public float dashCoolDown = 0.4f;
+    public float attackCoolDown = 0.2f; 
 
     //Valores de Salto
     public bool canJump = true;

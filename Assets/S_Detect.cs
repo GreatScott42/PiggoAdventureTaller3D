@@ -6,10 +6,6 @@ public class S_Detect : MonoBehaviour
 {
     private List<GameObject> listEnemies = new List<GameObject>();
 
-    private void Update()
-    {
-    }
-
     public List<GameObject> GetList()
     {
         return listEnemies;

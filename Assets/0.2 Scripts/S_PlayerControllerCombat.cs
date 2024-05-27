@@ -11,6 +11,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
     private Rigidbody rb;
 
     private S_Detect colWeapon;
+    private MeshRenderer meshWeapon;
 
     private float groundCheckDistance;
 
@@ -20,6 +21,8 @@ public class S_PlayerControllerCombat : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         colWeapon = GameObject.FindWithTag("Weapon").GetComponent<S_Detect>();
+        meshWeapon = colWeapon.GetComponent<MeshRenderer>();
+        meshWeapon.enabled = false;
 
         groundCheckDistance = (GetComponent<CapsuleCollider>().height / 2) + 0.05f;
     }
@@ -37,7 +40,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
     {
         //CODIGO DE MOVIMIENTO DEL PERSONAJE
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized;
-        float actualSpeed = Time.deltaTime * stats.Speed;
+        float actualSpeed = Time.deltaTime * stats.speed;
         
         if(moveDirection == Vector3.zero)
             rb.velocity = new Vector3(0f,rb.velocity.y,0f);
@@ -59,7 +62,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && stats.canJump)
         {
-            rb.AddForce(new Vector3(0, stats.JumpForce, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, stats.jumpForce, 0), ForceMode.Impulse);
             stats.canJump = false;
         }
 
@@ -73,9 +76,9 @@ public class S_PlayerControllerCombat : MonoBehaviour
     {
         stats.canDash = false;
         stats.canMove = false;
-        rb.AddForce(lastMoveDirection * stats.DashForce, ForceMode.Impulse);
+        rb.AddForce(lastMoveDirection * stats.dashForce, ForceMode.Impulse);
 
-        yield return new WaitForSeconds(stats.DashCoolDown);
+        yield return new WaitForSeconds(stats.dashCoolDown);
 
         stats.canMove = true;
         rb.velocity = Vector3.zero;
@@ -86,11 +89,28 @@ public class S_PlayerControllerCombat : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.J) && stats.canAttack)
         {
-            foreach(GameObject t in colWeapon.GetList())
-            {
-                t.SendMessage("GetDamage",stats.DmgAtack);
-            }
+            StartCoroutine(Attacking());
         }
+    } 
+    IEnumerator Attacking()
+    {
+        meshWeapon.enabled = true;
+
+        foreach (GameObject t in colWeapon.GetList())
+        {
+            t.SendMessage("GetDamage", stats.dmgAtack);
+            print("Se ha detectado" + t.name);
+        }
+
+        stats.canAttack = false;
+        stats.isAttack = true;
+
+        yield return new WaitForSeconds(stats.attackCoolDown);
+
+        meshWeapon.enabled = false;
+
+        stats.canAttack = true;
+        stats.isAttack = false;
     }
 
 
