@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class S_Creditos : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject creditos;
+    public Button botonmenu;
     float altura;
     Vector3 posInicial;
     void Start()
@@ -14,6 +16,7 @@ public class S_Creditos : MonoBehaviour
         altura = creditos.transform.position.y+(Time.deltaTime*6000);
         posInicial = creditos.transform.position;
         posInicial.y -= 200f;
+        botonmenu.onClick.AddListener(menu);
     }
 
     // Update is called once per frame
@@ -32,5 +35,9 @@ public class S_Creditos : MonoBehaviour
         {
             SceneManager.LoadScene("Sc_menuPrincipal");
         }
+    }
+    void menu()
+    {
+        SceneManager.LoadScene("Sc_menuPrincipal");
     }
 }
