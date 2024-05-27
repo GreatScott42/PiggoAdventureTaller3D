@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class S_menuPrincipal : MonoBehaviour
 {
@@ -38,5 +39,5 @@ public class S_menuPrincipal : MonoBehaviour
     void creditos()
     {
         SceneManager.LoadScene("Sc_Creditos");
-    }
+    }    
 }
