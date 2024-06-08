@@ -10,6 +10,7 @@ public class S_ChangeScene : MonoBehaviour
 
     private void Start()
     {
+        //destruir enemigo en el cambio de combate a exploracion
         if(GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == true)
         {
             Destroy(gameObject);
@@ -22,10 +23,12 @@ public class S_ChangeScene : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             //t = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-            GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().setPos(GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position);
-            GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().setRot(GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().rotation);
+            //GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().setPos(GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position);
+            //GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().setRot(GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().rotation);
 
-            GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 = true;
+            //GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 = true;
+            GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().guardarEscenaLvl1();
+
             //Debug.Log("guardando Transform: "+t.ToString());
             SceneManager.LoadScene(sceneName);
 

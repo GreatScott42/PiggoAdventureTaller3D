@@ -25,8 +25,10 @@ public class S_MovPlayerExpl : MonoBehaviour
         if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getPos() != null)
         {
             Debug.Log("aplicando tranform");
-            transform.position = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getPos();
-            transform.rotation = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getRot();
+            //transform.position = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getPos();
+            //transform.rotation = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getRot();
+            
+            GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().cargarEscenaLvl1();
         }
         else
         {

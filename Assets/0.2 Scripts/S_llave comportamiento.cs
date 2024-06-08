@@ -21,7 +21,7 @@ public class S_llavecomportamiento : MonoBehaviour
     void Start()
     {
         //por si ya se uso la llave antes del combate
-        if(GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().usedKey == true)
+        if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().usedKey == true)
         {
             ColliderPuerta.gameObject.SetActive(false);
             Destroy(Objetollave);

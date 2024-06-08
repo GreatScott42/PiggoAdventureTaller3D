@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - Waypoint
   - Boss
+  - Boton
   layers:
   - Default
   - TransparentFX
