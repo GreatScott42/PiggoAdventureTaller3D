@@ -20,7 +20,22 @@ public class S_MovPlayerExpl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().setTransform(transform);
+        //Debug.Log("cargando transform: "+GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getTransform().ToString());
+        if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getPos() != null)
+        {
+            Debug.Log("aplicando tranform");
+            //transform.position = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getPos();
+            //transform.rotation = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getRot();
+            
+            GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().cargarEscenaLvl1();
+        }
+        else
+        {
+            Debug.Log("transform no aplicado");
+        }
         rb = GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame

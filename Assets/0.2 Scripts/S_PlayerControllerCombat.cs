@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class S_PlayerControllerCombat : MonoBehaviour
 {
@@ -15,8 +16,12 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
     private float groundCheckDistance;
 
+    int enemiesTotal;
+
     void Start()
     {
+        
+        Debug.Log("enemigos en la escena: "+enemiesTotal);
         stats = GetComponent<S_PlayerStats>();
         rb = GetComponent<Rigidbody>();
 
@@ -33,7 +38,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
             Movement();
 
         Rotation();
-        Attack();
+        //Attack();
     }
 
     private void Movement()
@@ -91,6 +96,14 @@ public class S_PlayerControllerCombat : MonoBehaviour
         {
             StartCoroutine(Attacking());
         }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            foreach(GameObject a in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                Destroy(a);
+            }
+            
+        }
     } 
     IEnumerator Attacking()
     {
@@ -131,9 +144,19 @@ public class S_PlayerControllerCombat : MonoBehaviour
         //aplicar rotacion y movimiento
         rb.MoveRotation(rotation);
     }
+    private void CombToExpl()
+    {
+        enemiesTotal = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        Debug.Log(enemiesTotal);
+        if (GameObject.FindGameObjectWithTag("Boss")==null&&enemiesTotal<=0)
+        {            
+            SceneManager.LoadScene("Sc_EscenaExploracion");
+        }
+    }
 
     void Update()
     {
-        
+        CombToExpl();
+        Attack();
     }
 }

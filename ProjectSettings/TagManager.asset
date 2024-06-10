@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Ground
   - Weapon
+  - Waypoint
+  - Boss
+  - Boton
   layers:
   - Default
   - TransparentFX
