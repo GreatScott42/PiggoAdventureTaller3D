@@ -98,8 +98,11 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
         foreach (GameObject t in colWeapon.GetList())
         {
-            t.SendMessage("GetDamage", stats.dmgAtack);
-            print("Se ha detectado" + t.name);
+            if (t != null)
+            {
+                t.SendMessage("GetDamage", stats.dmgAtack);
+                print("Se ha detectado" + t.name);
+            }
         }
 
         stats.canAttack = false;
