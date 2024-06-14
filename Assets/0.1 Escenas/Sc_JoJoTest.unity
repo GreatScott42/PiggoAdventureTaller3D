@@ -374,7 +374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384229440427808585, guid: 7e77f7bc74614cd4eba68709c9f47a49, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2384229440427808585, guid: 7e77f7bc74614cd4eba68709c9f47a49, type: 3}
       propertyPath: m_TagString
@@ -528,7 +528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384229440427808585, guid: 7e77f7bc74614cd4eba68709c9f47a49, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2384229440427808585, guid: 7e77f7bc74614cd4eba68709c9f47a49, type: 3}
       propertyPath: m_TagString
@@ -774,13 +774,17 @@ PrefabInstance:
       propertyPath: attackTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5050927521215366130, guid: 7e77f7bc74614cd4eba68709c9f47a49, type: 3}
+      propertyPath: invencibleTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8940543707981998183, guid: 7e77f7bc74614cd4eba68709c9f47a49, type: 3}
       propertyPath: speed
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8940543707981998183, guid: 7e77f7bc74614cd4eba68709c9f47a49, type: 3}
       propertyPath: canMove
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -94,7 +94,6 @@ public class S_EnemyBehaviour1 : MonoBehaviour
         meshren.material.color = Colormain;
     }
 
-
     private void Movement()
     {
         Vector3 directionPlayer = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z).normalized;
@@ -115,7 +114,7 @@ public class S_EnemyBehaviour1 : MonoBehaviour
             {
                 //REINICIAR TODOS LOS PARAMETROS PARA EVITAR ERRORES 
                 stats.isAttack = false;
-                stats.canMove = true;
+                stats.canMove = false;
                 stats.canAttack = false;
 
                 stats.isInvulnerable = true;
@@ -144,7 +143,8 @@ public class S_EnemyBehaviour1 : MonoBehaviour
 
     IEnumerator Invulnerability()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
+        stats.canMove = true;
         stats.canAttack = true;
 
         yield return new WaitForSeconds(invencibleTime);
