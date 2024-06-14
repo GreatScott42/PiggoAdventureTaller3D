@@ -29,9 +29,13 @@ public class ScriptsGlobal : MonoBehaviour
     public GameObject Objetollave;
     public GameObject ColliderPuerta;*/
 
+    public Vector3 checkpointPos;
+
     // evitar duplicaciones
     private void Awake()
     {
+
+        checkpointPos = pos;
         if (Instancia == null)
         {
             Instancia = this;
