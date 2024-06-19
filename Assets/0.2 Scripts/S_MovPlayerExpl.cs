@@ -41,14 +41,20 @@ public class S_MovPlayerExpl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        groundCheckDistance = (GetComponent<CapsuleCollider>().height / 2) + 0.1f; //-> Hardcodeado
+        
 
         moveDirection = new Vector3(Input.GetAxis("Horizontal")  ,0f, Input.GetAxis("Vertical")).normalized;
 
         float actualSpeed = Time.deltaTime * speed;
         rb.MovePosition(transform.position + new Vector3(moveDirection.x * actualSpeed, 0, moveDirection.z * actualSpeed));
 
-        if(Input.GetKeyDown(KeyCode.Space) && canJump)
+        
+    }
+    private void Update()
+    {
+        groundCheckDistance = (GetComponent<CapsuleCollider>().height / 2) + 0.1f; //-> Hardcodeado
+
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
 
         RaycastHit hit;
