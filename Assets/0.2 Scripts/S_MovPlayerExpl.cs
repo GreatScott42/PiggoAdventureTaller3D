@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class S_MovPlayerExpl : MonoBehaviour
 {
     public float speed = 1.0f;
-    public float jumpForce = 0.5f;
+    public float jumpForce = 1.0f;
 
     //El personaje puede Saltar
     [SerializeField] private bool canJump = false;
@@ -34,20 +34,19 @@ public class S_MovPlayerExpl : MonoBehaviour
         {
             Debug.Log("transform no aplicado");
         }
-
-
         rb = GetComponent<Rigidbody>();
 
-    }    
+    }
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         groundCheckDistance = (GetComponent<CapsuleCollider>().height / 2) + 0.1f; //-> Hardcodeado
 
-        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized;
+        moveDirection = new Vector3(Input.GetAxis("Horizontal")  ,0f, Input.GetAxis("Vertical")).normalized;
 
         float actualSpeed = Time.deltaTime * speed;
-        rb.MovePosition(rb.position + new Vector3(moveDirection.x, 0, moveDirection.z)*actualSpeed);
+        rb.MovePosition(transform.position + new Vector3(moveDirection.x * actualSpeed, 0, moveDirection.z * actualSpeed));
 
         if(Input.GetKeyDown(KeyCode.Space) && canJump)
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
