@@ -143,7 +143,7 @@ public class S_EnemyBehaviour1 : MonoBehaviour
 
     IEnumerator Invulnerability()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         stats.canMove = true;
         stats.canAttack = true;
 

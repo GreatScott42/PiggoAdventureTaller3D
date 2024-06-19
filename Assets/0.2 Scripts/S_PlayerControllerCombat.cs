@@ -41,6 +41,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
         //Attack();
     }
 
+    //Bloque de Movimiento
     private void Movement()
     {
         //CODIGO DE MOVIMIENTO DEL PERSONAJE
@@ -76,7 +77,6 @@ public class S_PlayerControllerCombat : MonoBehaviour
         if (Input.GetKey(KeyCode.E) && stats.canDash)
             StartCoroutine(Dash());
     }
-
     IEnumerator Dash()
     {
         stats.canDash = false;
@@ -89,7 +89,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
         rb.velocity = Vector3.zero;
     }
 
-
+    //Bloque de Combate
     private void Attack()
     {
         if(Input.GetKeyDown(KeyCode.J) && stats.canAttack)
@@ -128,6 +128,41 @@ public class S_PlayerControllerCombat : MonoBehaviour
         stats.canAttack = true;
         stats.isAttack = false;
     }
+
+    private void GetDamage(int dmg)
+    {
+        if (!stats.isInvulnerable)
+        {
+            StopAllCoroutines();
+
+            stats.life -= dmg;
+            if (stats.life <= 0)
+                print("El jugador se ha eliminado");
+
+            else
+            {
+                //REINICIAR TODOS LOS PARAMETROS PARA EVITAR ERRORES 
+                stats.isAttack = false;
+                stats.canMove = false;
+                stats.canAttack = false;
+
+                stats.isInvulnerable = true;
+                StartCoroutine(Invulnerability());
+            }
+        }
+
+    }
+
+    IEnumerator Invulnerability()
+    {
+        yield return new WaitForSeconds(1f);
+        stats.canMove = true;
+        stats.canAttack = true;
+
+        yield return new WaitForSeconds(stats.invencibleTime);
+        stats.isInvulnerable = false;
+    }
+
 
 
     // ESTA WEA SE VA A TENER QUE QUITAR

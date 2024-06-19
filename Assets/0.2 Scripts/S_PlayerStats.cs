@@ -11,7 +11,8 @@ public class S_PlayerStats : MonoBehaviour
     public float jumpForce = 10f;
     public float dashForce = 5f;
     public float dashCoolDown = 0.4f;
-    public float attackCoolDown = 0.2f; 
+    public float attackCoolDown = 0.2f;
+    public float invencibleTime = 0.5f;
 
     //Valores de Salto
     public bool canJump = true;
@@ -19,6 +20,9 @@ public class S_PlayerStats : MonoBehaviour
     //Valores de Ataque
     public bool canAttack = true;
     public bool isAttack = false;
+
+    //valores de invencibilidad
+    public bool isInvulnerable = false;
 
     //Valores de Movimiento
     public bool canMove = true;

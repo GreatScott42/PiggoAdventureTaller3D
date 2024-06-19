@@ -7,6 +7,8 @@ public class S_EnemyStats : MonoBehaviour
     public int life;
     public int speed;
 
+    public int dmg;
+
     public bool isAttack = false;
     public bool isInvulnerable = false;
 
