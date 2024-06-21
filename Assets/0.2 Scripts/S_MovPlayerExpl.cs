@@ -14,12 +14,15 @@ public class S_MovPlayerExpl : MonoBehaviour
     [SerializeField] private float groundCheckDistance; 
 
     private Vector3 moveDirection;
+    private Vector3 lastmovedirection;
 
     private Rigidbody rb;
 
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GameObject.Find("piggoAnim").GetComponent<Animator>();
         //GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().setTransform(transform);
         //Debug.Log("cargando transform: "+GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getTransform().ToString());
         if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getPos() != null)
@@ -52,16 +55,61 @@ public class S_MovPlayerExpl : MonoBehaviour
     }
     private void Update()
     {
+        /*if (moveDirection == Vector3.zero && rb.velocity != Vector3.zero)
+        {
+            rb.velocity = Vector3.zero;
+        }*/
+
+
+        if (moveDirection != Vector3.zero)
+            lastmovedirection = moveDirection;
+
+
+
+        Rotation();
+        if (moveDirection==Vector3.zero)
+        {
+            animator.SetBool("running",false);
+        }else
+        {
+            animator.SetBool("running", true);
+        }
+        
+
         groundCheckDistance = (GetComponent<CapsuleCollider>().height / 2) + 0.1f; //-> Hardcodeado
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
-            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+        {
+            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);            
+        }
+            
+        
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -transform.up, out hit, groundCheckDistance))
+        {            
             canJump = true;
+            animator.SetBool("jumping", false);
+        }
         else
+        {            
             canJump = false;
+            animator.SetBool("jumping", true);
+        }        
+            
+    }
+    private void Rotation()
+    {
+        //esto es para rotar al jugador sin alterar el movimiento
+        if (rb.rotation == Quaternion.LookRotation(moveDirection)) { return; }
+
+        Quaternion rotation = Quaternion.LookRotation(lastmovedirection);
+
+        //hacerlo mas lento, porque va muy rapido
+        rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2520 * Time.deltaTime);//2520=360*7
+
+        //aplicar rotacion y movimiento
+        rb.MoveRotation(rotation);
     }
 
     private void OnCollisionEnter(Collision collision)

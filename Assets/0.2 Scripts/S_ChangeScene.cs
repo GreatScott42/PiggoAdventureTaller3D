@@ -7,14 +7,17 @@ public class S_ChangeScene : MonoBehaviour
 {
     [SerializeField] private string sceneName;
     private Transform t;
-
-    private void Start()
+    private void Awake()
     {
-        //destruir enemigo en el cambio de combate a exploracion
-        if(GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == true)
+        if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == true)
         {
             Destroy(gameObject);
         }
+    }
+    private void Start()
+    {
+        //destruir enemigo en el cambio de combate a exploracion
+        
     }
 
 

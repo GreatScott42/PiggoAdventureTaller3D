@@ -18,9 +18,12 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
     int enemiesTotal;
 
+    private Animator animator;
+
     void Start()
     {
-        
+        animator = GameObject.Find("piggoAnim").GetComponent<Animator>();
+
         Debug.Log("enemigos en la escena: "+enemiesTotal);
         stats = GetComponent<S_PlayerStats>();
         rb = GetComponent<Rigidbody>();
@@ -60,10 +63,15 @@ public class S_PlayerControllerCombat : MonoBehaviour
         {
             stats.canJump = true;
             stats.canDash = true;
+            animator.SetBool("jumping", false);
         }
-
         else
+        {
+            animator.SetBool("jumping", true);
             stats.canJump = false;
+        }
+            
+
 
         if (Input.GetKey(KeyCode.Space) && stats.canJump)
         {
@@ -108,6 +116,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
     IEnumerator Attacking()
     {
         meshWeapon.enabled = true;
+        animator.SetBool("attacking", true);
 
         foreach (GameObject t in colWeapon.GetList())
         {
@@ -119,7 +128,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
         stats.isAttack = true;
 
         yield return new WaitForSeconds(stats.attackCoolDown);
-
+        animator.SetBool("attacking", false);
         meshWeapon.enabled = false;
 
         stats.canAttack = true;
@@ -155,5 +164,14 @@ public class S_PlayerControllerCombat : MonoBehaviour
     {
         CombToExpl();
         Attack();
+
+        if (moveDirection == Vector3.zero)
+        {
+            animator.SetBool("running", false);
+        }
+        else
+        {
+            animator.SetBool("running", true);
+        }
     }
 }
