@@ -16,12 +16,15 @@ public class S_MovPlayerExpl : MonoBehaviour
     private Vector3 moveDirection;
     private Vector3 lastmovedirection;
 
+    private GameObject lvl2;
+
     private Rigidbody rb;
 
     private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        lvl2 = GameObject.Find("Escenario2");
         animator = GameObject.Find("piggoAnim").GetComponent<Animator>();
         //GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().setTransform(transform);
         //Debug.Log("cargando transform: "+GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getTransform().ToString());
@@ -38,6 +41,8 @@ public class S_MovPlayerExpl : MonoBehaviour
             Debug.Log("transform no aplicado");
         }
         rb = GetComponent<Rigidbody>();
+
+        
 
     }
 
@@ -95,8 +100,18 @@ public class S_MovPlayerExpl : MonoBehaviour
         {            
             canJump = false;
             animator.SetBool("jumping", true);
-        }        
-            
+        }
+
+
+        //cargar lvl2
+        if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == true)
+        {
+            if (lvl2.transform.position.y >= 16)
+            {
+                lvl2.transform.position = Vector3.MoveTowards(lvl2.transform.position, new Vector3(lvl2.transform.position.x, 15f, lvl2.transform.position.z), 5f*Time.deltaTime);
+            }
+            //Destroy(gameObject);
+        }
     }
     private void Rotation()
     {

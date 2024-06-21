@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
@@ -24,8 +25,11 @@ public class S_EnemyBehaviour1 : MonoBehaviour
     public float rangeDamage = 5;
     [SerializeField] private float distancePlayer;
 
+    private Animator animator;
+
     private void Start()
     {
+        animator = GameObject.Find("Animesqueleto").GetComponent<Animator>();
         stats = GetComponent<S_EnemyStats>();
         rb = GetComponent<Rigidbody>();
         meshren = GetComponent<MeshRenderer>();
@@ -99,6 +103,14 @@ public class S_EnemyBehaviour1 : MonoBehaviour
     {
         Vector3 directionPlayer = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z).normalized;
         rb.velocity = new Vector3(directionPlayer.x * stats.speed, 0, directionPlayer.z * stats.speed);
+        /*if (rb.velocity == Vector3.zero)
+        {
+            animator.SetBool("run",false);
+        }
+        else
+        {
+            animator.SetBool("run", true);
+        }*/
     }
 
     private void GetDamage(int dmg)
@@ -134,11 +146,13 @@ public class S_EnemyBehaviour1 : MonoBehaviour
     {
         yield return new WaitForSeconds(attackTime/2);
         stats.isAttack = true;
+        animator.SetBool("attack",true);
 
         //Codigo donde le hace daño al jugador
 
         yield return new WaitForSeconds(attackTime / 2);
         stats.isAttack = false;
+        animator.SetBool("attack", false);
         stats.canMove = true;
     }
 
