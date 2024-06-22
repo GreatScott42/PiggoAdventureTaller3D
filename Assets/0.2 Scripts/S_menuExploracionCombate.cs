@@ -61,7 +61,8 @@ public class S_menuExploracionCombate : MonoBehaviour
     void menu()
     {
         canvas.SetActive(false);
-        Time.timeScale = 1.0f;
+        Time.timeScale = 1.0f;        
+        
         SceneManager.LoadScene("Sc_menuPrincipal");
     }
     private void CombToExpl()

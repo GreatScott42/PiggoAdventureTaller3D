@@ -10,8 +10,8 @@ public class ScriptsGlobal : MonoBehaviour
     // Start is called before the first frame update    
     // Script global que guarda informacion entre escena de combate y exploracion, no se elimina entre cambio de escenas
     // pos del jugador
-    private Vector3 pos;
-    private Quaternion rot;
+    public Vector3 pos;
+    public Quaternion rot;
     // para que no se duplique al recargar la primera escena
     public static ScriptsGlobal Instancia;
     // bools para eliminar enemigo y la puerta una vez se gane al enemigo
@@ -24,7 +24,7 @@ public class ScriptsGlobal : MonoBehaviour
     // guardado persistente, guardado en %appdata%/locallow/defaultcompany/(carpeta del proyecto)/Stylish/Esave 
     //(al menos en mi caso, se puede cambiar en el script del objeto savefile)
     private SaveFileSetup saveFileSetup;
-    private SaveFile saveFile;
+    public SaveFile saveFile;
     /*
      * la destruccion de la puerta y llave se hacen en el script del comportamiento de llave
     public GameObject Objetollave;
@@ -86,8 +86,8 @@ public class ScriptsGlobal : MonoBehaviour
 
     // guardado persistente
     public void SaveGame()
-    {                
-        //escena 1
+    {
+        //escena 1        
         saveFile.AddOrUpdateData("pos", pos);
         saveFile.AddOrUpdateData("rot", rot);
         saveFile.AddOrUpdateData("destroyenemy1",destroyEnemy1);
@@ -122,7 +122,7 @@ public class ScriptsGlobal : MonoBehaviour
     public void setPos(Vector3 newpos)
     {
         pos = newpos;
-        
+        saveFile.AddOrUpdateData("pos", pos);
     }
     public void setRot(Quaternion newrot)
     {
