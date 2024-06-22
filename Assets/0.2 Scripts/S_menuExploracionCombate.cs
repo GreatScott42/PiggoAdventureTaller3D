@@ -17,12 +17,22 @@ public class S_menuExploracionCombate : MonoBehaviour
 
     int enemiesTotal;
     bool changescene;
+
+    float timeScale;
+    //public GameObject canvas;
+    
+    
+    
     // Start is called before the first frame update
     void Start()
     {
+        timeScale = Time.timeScale;
+
         changescene = false;
         botonContinuar.onClick.AddListener(continuar);
         botonMenu.onClick.AddListener(menu);
+        if (prefab1 == null || prefab2 == null)
+            return;
         if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().nextEnemy==1)
         {
             Instantiate(prefab1,transform.position,Quaternion.identity);
@@ -40,8 +50,8 @@ public class S_menuExploracionCombate : MonoBehaviour
         if (changescene)
         {
             CombToExpl();
-        }
-        
+        }       
+
     }
     void continuar()
     {
