@@ -42,7 +42,10 @@ public class S_MovPlayerExpl : MonoBehaviour
         }
         rb = GetComponent<Rigidbody>();
 
-        
+        if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy2)
+        {
+            lvl2.transform.position = new Vector3(lvl2.transform.position.x, 15f, lvl2.transform.position.z);
+        }
 
     }
 
@@ -104,7 +107,7 @@ public class S_MovPlayerExpl : MonoBehaviour
 
 
         //cargar lvl2
-        if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == true)
+        if (GameObject.Find("Enemigos")==null)
         {
             if (lvl2.transform.position.y >= 16)
             {

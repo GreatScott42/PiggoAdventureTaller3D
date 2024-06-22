@@ -106,6 +106,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
+            StartCoroutine(espera());
             foreach(GameObject a in GameObject.FindGameObjectsWithTag("Enemy"))
             {
                 Destroy(a);
@@ -150,19 +151,14 @@ public class S_PlayerControllerCombat : MonoBehaviour
         //aplicar rotacion y movimiento
         rb.MoveRotation(rotation);
     }
-    private void CombToExpl()
+    
+    IEnumerator espera()
     {
-        enemiesTotal = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        Debug.Log(enemiesTotal);
-        if (GameObject.FindGameObjectWithTag("Boss")==null&&enemiesTotal<=0)
-        {            
-            SceneManager.LoadScene("Sc_EscenaExploracion");
-        }
+        yield return new WaitForSeconds(1);
     }
 
     void Update()
-    {
-        CombToExpl();
+    {        
         Attack();
 
         if (moveDirection == Vector3.zero)

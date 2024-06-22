@@ -16,6 +16,7 @@ public class ScriptsGlobal : MonoBehaviour
     public static ScriptsGlobal Instancia;
     // bools para eliminar enemigo y la puerta una vez se gane al enemigo
     public bool destroyEnemy1;
+    public bool destroyEnemy2;
     public bool usedKey;
 
     public int botonesCorrectosApretados;
@@ -30,6 +31,8 @@ public class ScriptsGlobal : MonoBehaviour
     public GameObject ColliderPuerta;*/
 
     public Vector3 checkpointPos;
+
+    public int nextEnemy;
 
     // evitar duplicaciones
     private void Awake()
@@ -49,6 +52,8 @@ public class ScriptsGlobal : MonoBehaviour
     }
     void Start()
     {
+        nextEnemy = 1;
+
         saveFileSetup = GameObject.Find("SaveFile").GetComponent<SaveFileSetup>();
         saveFile = saveFileSetup.GetSaveFile();
 

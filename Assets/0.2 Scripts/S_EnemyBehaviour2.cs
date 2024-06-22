@@ -17,8 +17,12 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     [SerializeField] float temp;
     [SerializeField] float JumpForce;
 
+    private Animator animator;
+
     private void Start()
-    {                        
+    {
+        animator = GameObject.Find("idlerapi").GetComponent<Animator>();
+
         ogcolor = GetComponent<MeshRenderer>().material.color;
         target = GameObject.FindGameObjectWithTag("Player");
         stats = GetComponent<S_EnemyStats>();
@@ -30,24 +34,32 @@ public class S_EnemyBehaviour2 : MonoBehaviour
 
     private void Update()
     {
-
+        target = GameObject.FindGameObjectWithTag("Player");
         if (temp > 0)
         {
             temp -= Time.deltaTime;
             GetComponent<MeshRenderer>().material.color = ogcolor;
+            
             transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(new Vector3(target.transform.position.x - transform.position.x, 0, target.transform.position.z - transform.position.z)),1);
-        }
-        
+        }        
         else
         {
             //stats.speed = stats.speed * -1;                        
             temp = tempTime;
             //Movement();
-            DashAttack();
+            DashAttack();            
         }
         if (temp <= 1)
         {
             GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+        if (rb.velocity == Vector3.zero)
+        {
+            animator.SetBool("attack", false);
+        }
+        else
+        {
+            animator.SetBool("attack", true);
         }
     }
 
