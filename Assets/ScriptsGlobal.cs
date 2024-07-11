@@ -2,8 +2,12 @@ using Esper.ESave;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
+using System.IO;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScriptsGlobal : MonoBehaviour
 {
@@ -97,9 +101,11 @@ public class ScriptsGlobal : MonoBehaviour
 
         Debug.Log("Saved game.");
     }
+    
     public void LoadGame()
     {
         //escena 1
+        
         if (!saveFile.HasData("rot"))
         {
             return;
@@ -136,7 +142,7 @@ public class ScriptsGlobal : MonoBehaviour
         rot = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().rotation;
 
         //destruir enemigo del lvl1, Script S_ChangeScene
-        destroyEnemy1 = true;
+        //destroyEnemy1 = true;
         SaveGame();
     }
     public void cargarEscenaLvl1()
@@ -146,10 +152,24 @@ public class ScriptsGlobal : MonoBehaviour
         player.transform.position = pos;
         player.transform.rotation = rot;
     }
+    public void resetsave()
+    {
+        Debug.Log(saveFile.fullPath);
+        if (File.Exists(saveFile.fullPath))
+        {
+            File.Delete(saveFile.fullPath);
+            SceneManager.LoadScene("Sc_menuPrincipal");
+            //Console.WriteLine("Archivo borrado exitosamente.");
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            resetsave();
+        }
         //pos = playerTransform.position;
         //Debug.Log(playerTransform.position);
         //playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();

@@ -63,10 +63,10 @@ public class S_MovPlayerExpl : MonoBehaviour
     }
     private void Update()
     {
-        /*if (moveDirection == Vector3.zero && rb.velocity != Vector3.zero)
+        if (moveDirection == Vector3.zero && (rb.velocity.x!=0||rb.velocity.z!=0))
         {
-            rb.velocity = Vector3.zero;
-        }*/
+            rb.velocity = new(0,rb.velocity.y,0);
+        }
 
 
         if (moveDirection != Vector3.zero)

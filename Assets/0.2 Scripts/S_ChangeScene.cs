@@ -37,13 +37,17 @@ public class S_ChangeScene : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            if (gameObject.name == "Enemigos")
+            if (gameObject.name == "Enemigos"&&!GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1)
             {
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().nextEnemy = 1;
-            }else if(gameObject.name == "Enemigo2")
+                GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 = true;
+                SceneManager.LoadScene(sceneName);
+            }
+            else if(gameObject.name == "Enemigo2"&&!GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy2)
             {
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().nextEnemy = 2;
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy2 = true;
+                SceneManager.LoadScene(sceneName);
             }
 
             if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == true)
@@ -62,12 +66,19 @@ public class S_ChangeScene : MonoBehaviour
             GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().guardarEscenaLvl1();
 
             //Debug.Log("guardando Transform: "+t.ToString());
-            if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy2)
+            /*if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy2)
             {
                 SceneManager.LoadScene("Sc_Creditos");
-            }
+            }*/
 
-            SceneManager.LoadScene(sceneName);
+            //!
+            /*if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == false)
+            {
+                //Destroy(GameObject.Find("Enemigos"));
+                SceneManager.LoadScene(sceneName);
+            }*/
+
+            
 
             //SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
             //Destroy(gameObject);
