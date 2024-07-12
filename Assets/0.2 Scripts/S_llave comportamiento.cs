@@ -12,6 +12,7 @@ public class S_llavecomportamiento : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ColliderPuerta.gameObject.SetActive(false);
+            GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().usedKey = true;
             Destroy(Objetollave);
         }
     }
@@ -19,7 +20,12 @@ public class S_llavecomportamiento : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //por si ya se uso la llave antes del combate
+        if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().usedKey == true)
+        {
+            ColliderPuerta.gameObject.SetActive(false);
+            Destroy(Objetollave);
+        }
     }
 
     // Update is called once per frame

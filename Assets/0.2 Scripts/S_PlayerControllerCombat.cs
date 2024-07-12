@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class S_PlayerControllerCombat : MonoBehaviour
 {
@@ -15,8 +16,15 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
     private float groundCheckDistance;
 
+    int enemiesTotal;
+
+    private Animator animator;
+
     void Start()
     {
+        animator = GameObject.Find("piggoAnim").GetComponent<Animator>();
+
+        Debug.Log("enemigos en la escena: "+enemiesTotal);
         stats = GetComponent<S_PlayerStats>();
         rb = GetComponent<Rigidbody>();
 
@@ -33,7 +41,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
             Movement();
 
         Rotation();
-        Attack();
+        //Attack();
     }
 
     private void Movement()
@@ -55,10 +63,15 @@ public class S_PlayerControllerCombat : MonoBehaviour
         {
             stats.canJump = true;
             stats.canDash = true;
+            animator.SetBool("jumping", false);
         }
-
         else
+        {
+            animator.SetBool("jumping", true);
             stats.canJump = false;
+        }
+            
+
 
         if (Input.GetKey(KeyCode.Space) && stats.canJump)
         {
@@ -91,10 +104,20 @@ public class S_PlayerControllerCombat : MonoBehaviour
         {
             StartCoroutine(Attacking());
         }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            StartCoroutine(espera());
+            foreach(GameObject a in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                Destroy(a);
+            }
+            
+        }
     } 
     IEnumerator Attacking()
     {
         meshWeapon.enabled = true;
+        animator.SetBool("attacking", true);
 
         foreach (GameObject t in colWeapon.GetList())
         {
@@ -106,7 +129,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
         stats.isAttack = true;
 
         yield return new WaitForSeconds(stats.attackCoolDown);
-
+        animator.SetBool("attacking", false);
         meshWeapon.enabled = false;
 
         stats.canAttack = true;
@@ -128,9 +151,23 @@ public class S_PlayerControllerCombat : MonoBehaviour
         //aplicar rotacion y movimiento
         rb.MoveRotation(rotation);
     }
+    
+    IEnumerator espera()
+    {
+        yield return new WaitForSeconds(1);
+    }
 
     void Update()
-    {
-        
+    {        
+        Attack();
+
+        if (moveDirection == Vector3.zero)
+        {
+            animator.SetBool("running", false);
+        }
+        else
+        {
+            animator.SetBool("running", true);
+        }
     }
 }
