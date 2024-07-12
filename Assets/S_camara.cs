@@ -26,11 +26,11 @@ public class S_camara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lookup();
+        //lookup();
         //Debug.Log(transform.position-GameObject.Find("Jugador").GetComponent<Transform>().position);
     }
     void LateUpdate()
-    {        
+    {
         
         transform.position = target.position + offset;
     }

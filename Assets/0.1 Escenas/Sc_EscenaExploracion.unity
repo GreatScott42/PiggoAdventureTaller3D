@@ -2048,6 +2048,7 @@ GameObject:
   - component: {fileID: 332632330}
   - component: {fileID: 332632329}
   - component: {fileID: 332632328}
+  - component: {fileID: 332632331}
   m_Layer: 0
   m_Name: Suelo (1)
   m_TagString: Ground
@@ -2064,8 +2065,8 @@ Transform:
   m_GameObject: {fileID: 332632326}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.0389, y: -0, z: -8.1325}
-  m_LocalScale: {x: 14.055771, y: 1, z: 13.540525}
+  m_LocalPosition: {x: 27.0389, y: -9.6932, z: -8.1325}
+  m_LocalScale: {x: 14.055771, y: 10.5993395, z: 13.540525}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 849783739}
@@ -2087,7 +2088,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2111,7 +2112,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 186d04794a838f54cb398a37672ccba0, type: 2}
+  - {fileID: 2100000, guid: e93b79bf546cc4a4bb4fd85cc05be721, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2140,7 +2141,29 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332632326}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 3070845225984448950, guid: 953843115b82dcc4b927824c1315e515, type: 3}
+--- !u!64 &332632331
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332632326}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3070845225984448950, guid: 953843115b82dcc4b927824c1315e515, type: 3}
 --- !u!1 &350691162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2482,6 +2505,7 @@ GameObject:
   - component: {fileID: 415989608}
   - component: {fileID: 415989607}
   - component: {fileID: 415989610}
+  - component: {fileID: 415989611}
   m_Layer: 0
   m_Name: Suelo (3)
   m_TagString: Ground
@@ -2498,8 +2522,8 @@ Transform:
   m_GameObject: {fileID: 415989605}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.06, y: 2.22, z: 13.62}
-  m_LocalScale: {x: 30, y: 5.4591904, z: 30}
+  m_LocalPosition: {x: 35.06, y: -5.835, z: 13.62}
+  m_LocalScale: {x: 30, y: 13.514226, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 849783739}
@@ -2521,7 +2545,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2545,7 +2569,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6538903991835684241, guid: 953843115b82dcc4b927824c1315e515, type: 3}
+  - {fileID: 2100000, guid: 49505e7a97298744eb049b0e24b8ad3d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2588,6 +2612,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textureScale: {x: 1, y: 1}
+--- !u!64 &415989611
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415989605}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3070845225984448950, guid: 953843115b82dcc4b927824c1315e515, type: 3}
 --- !u!1 &427493107
 GameObject:
   m_ObjectHideFlags: 0
@@ -8191,7 +8237,7 @@ Transform:
   m_GameObject: {fileID: 1261486534}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.5, y: 1.5, z: -7.67}
+  m_LocalPosition: {x: 43.5, y: 1.99, z: -7.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9925,6 +9971,7 @@ GameObject:
   - component: {fileID: 1913179849}
   - component: {fileID: 1913179848}
   - component: {fileID: 1913179847}
+  - component: {fileID: 1913179850}
   m_Layer: 0
   m_Name: Suelo (2)
   m_TagString: Ground
@@ -9941,8 +9988,8 @@ Transform:
   m_GameObject: {fileID: 1913179845}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 43.26, y: 0, z: -8.04}
-  m_LocalScale: {x: 13.607456, y: 1, z: 13.355265}
+  m_LocalPosition: {x: 43.26, y: -7.6693, z: -8.04}
+  m_LocalScale: {x: 13.607456, y: 8.575402, z: 13.355265}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 849783739}
@@ -9964,7 +10011,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -9988,7 +10035,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 186d04794a838f54cb398a37672ccba0, type: 2}
+  - {fileID: 2100000, guid: 49505e7a97298744eb049b0e24b8ad3d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10017,7 +10064,29 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913179845}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 3070845225984448950, guid: 953843115b82dcc4b927824c1315e515, type: 3}
+--- !u!64 &1913179850
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913179845}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3070845225984448950, guid: 953843115b82dcc4b927824c1315e515, type: 3}
 --- !u!1 &1924817524
 GameObject:
   m_ObjectHideFlags: 0
@@ -10550,7 +10619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 73942cab9ea774643833958d43ec0e54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.05
+      value: -0.97
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 73942cab9ea774643833958d43ec0e54, type: 3}
       propertyPath: m_LocalPosition.z
