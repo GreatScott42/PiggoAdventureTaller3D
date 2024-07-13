@@ -9,9 +9,12 @@ public class S_camara : MonoBehaviour
     public Transform target; 
     public Vector3 offset;
     public Vector3 lk;
+    
     bool lookp;
+    bool looked;
     void Start()
     {
+        looked = true;
         lk = Vector3.zero;
         lookp = false;
         if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1)
@@ -26,7 +29,7 @@ public class S_camara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //lookup();
+        lookup();
         //Debug.Log(transform.position-GameObject.Find("Jugador").GetComponent<Transform>().position);
     }
     void LateUpdate()
@@ -40,15 +43,17 @@ public class S_camara : MonoBehaviour
         {            
             transform.LookAt(GameObject.Find("target").transform);
         }
-        else
+        else if (looked)
         {
             transform.LookAt(target.transform);
+            looked = false;
         }
     }
     IEnumerator looklvl2()
     {
         yield return new WaitForSeconds(6);
         lookp = false;
+        looked = true;
     }
 
 

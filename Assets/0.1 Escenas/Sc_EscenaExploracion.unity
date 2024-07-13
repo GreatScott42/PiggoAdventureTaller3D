@@ -2112,7 +2112,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e93b79bf546cc4a4bb4fd85cc05be721, type: 2}
+  - {fileID: 2100000, guid: 49505e7a97298744eb049b0e24b8ad3d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2504,7 +2504,6 @@ GameObject:
   - component: {fileID: 415989609}
   - component: {fileID: 415989608}
   - component: {fileID: 415989607}
-  - component: {fileID: 415989610}
   - component: {fileID: 415989611}
   m_Layer: 0
   m_Name: Suelo (3)
@@ -2598,20 +2597,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415989605}
-  m_Mesh: {fileID: 3070845225984448950, guid: 953843115b82dcc4b927824c1315e515, type: 3}
---- !u!114 &415989610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 415989605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4f31fb4c1aab040aae409d54f3da7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textureScale: {x: 1, y: 1}
+  m_Mesh: {fileID: 4300000, guid: 3d356dab723b69f4c85f2c137e12d50b, type: 2}
 --- !u!64 &415989611
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5538,7 +5524,6 @@ Transform:
   m_Children:
   - {fileID: 1750060773}
   - {fileID: 131822306}
-  - {fileID: 415989606}
   - {fileID: 571683760}
   - {fileID: 1017761472}
   - {fileID: 863842936}
@@ -5550,6 +5535,7 @@ Transform:
   - {fileID: 236066508}
   - {fileID: 332632327}
   - {fileID: 1913179846}
+  - {fileID: 415989606}
   - {fileID: 2127731678}
   - {fileID: 2024016871}
   - {fileID: 1251144883}
