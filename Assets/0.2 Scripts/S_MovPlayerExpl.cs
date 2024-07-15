@@ -30,7 +30,7 @@ public class S_MovPlayerExpl : MonoBehaviour
         //Debug.Log("cargando transform: "+GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getTransform().ToString());
         if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getPos() != null)
         {
-            Debug.Log("aplicando tranform");
+            //Debug.Log("aplicando tranform");
             //transform.position = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getPos();
             //transform.rotation = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().getRot();
             
@@ -38,7 +38,7 @@ public class S_MovPlayerExpl : MonoBehaviour
         }
         else
         {
-            Debug.Log("transform no aplicado");
+            //Debug.Log("transform no aplicado");
         }
         rb = GetComponent<Rigidbody>();
 
