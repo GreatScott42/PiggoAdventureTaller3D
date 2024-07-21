@@ -25,7 +25,16 @@ public class S_botonFalso : MonoBehaviour
             {
                 a.GetComponent<MeshRenderer>().material.color = Color.red;
             }
-            
+            if(GameObject.Find("b1")!=null)
+                GameObject.Find("b1").GetComponent<MeshRenderer>().material.color = Color.red;
+            if(GameObject.Find("b2")!=null)
+                GameObject.Find("b2").GetComponent<MeshRenderer>().material.color = Color.red;
+            if(GameObject.Find("b5")!=null)
+                GameObject.Find("b5").GetComponent<MeshRenderer>().material.color = Color.red;
+            if(GameObject.Find("b6"))
+                GameObject.Find("b6").GetComponent<MeshRenderer>().material.color = Color.red;
+            if(GameObject.Find("b7")!=null)
+                GameObject.Find("b7").GetComponent<MeshRenderer>().material.color = Color.red;
 
             GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().botonesCorrectosApretados=0;
         }

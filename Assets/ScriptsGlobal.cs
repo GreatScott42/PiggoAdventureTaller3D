@@ -38,6 +38,8 @@ public class ScriptsGlobal : MonoBehaviour
 
     public int nextEnemy;
 
+    public GameObject explosion;
+
     // evitar duplicaciones
     private void Awake()
     {
@@ -169,6 +171,32 @@ public class ScriptsGlobal : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             resetsave();
+        }
+
+
+
+        if (botonesCorrectosApretados == 1)
+        {
+            if (GameObject.Find("b1") != null)
+                GameObject.Find("b1").GetComponent<MeshRenderer>().material.color = Color.yellow;
+            if (GameObject.Find("b5") != null)
+                GameObject.Find("b5").GetComponent<MeshRenderer>().material.color = Color.yellow;
+        }
+        else if (botonesCorrectosApretados == 2)
+        {
+            if (GameObject.Find("b5") != null)
+                GameObject.Find("b5").GetComponent<MeshRenderer>().material.color = Color.yellow;
+            if (GameObject.Find("b6") != null)
+                GameObject.Find("b6").GetComponent<MeshRenderer>().material.color = Color.yellow;
+        }
+        else if (botonesCorrectosApretados==3)
+        {
+            if (GameObject.Find("b6") != null)
+                GameObject.Find("b6").GetComponent<MeshRenderer>().material.color = Color.yellow;
+            if (GameObject.Find("b5") != null)
+                GameObject.Find("b5").GetComponent<MeshRenderer>().material.color = Color.yellow;
+            if (GameObject.Find("b7") != null)
+                GameObject.Find("b7").GetComponent<MeshRenderer>().material.color = Color.yellow;
         }
         //pos = playerTransform.position;
         //Debug.Log(playerTransform.position);
