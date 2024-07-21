@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class S_MovPlayerExpl : MonoBehaviour
 {
@@ -21,9 +22,19 @@ public class S_MovPlayerExpl : MonoBehaviour
     private Rigidbody rb;
 
     private Animator animator;
+
+    private bool startCAM;
+    private string horizontal;
+    private string vertical;
+
+    public GameObject uin2p1;
+    public GameObject ui2p2;
     // Start is called before the first frame update
     void Start()
     {
+        startCAM = false;
+        //for (int i = 0; i < 10; i++) { Camera.main.GetComponent<Transform>().LookAt(transform); }
+        
         lvl2 = GameObject.Find("Escenario2");
         animator = GameObject.Find("piggoAnim").GetComponent<Animator>();
         //GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().setTransform(transform);
@@ -47,6 +58,8 @@ public class S_MovPlayerExpl : MonoBehaviour
             lvl2.transform.position = new Vector3(lvl2.transform.position.x, 15f, lvl2.transform.position.z);
         }
 
+        horizontal = "Horizontal";
+        vertical = "Vertical";
     }
 
     // Update is called once per frame
@@ -54,7 +67,11 @@ public class S_MovPlayerExpl : MonoBehaviour
     {
         
 
-        moveDirection = new Vector3(Input.GetAxis("Horizontal")  ,0f, Input.GetAxis("Vertical")).normalized;
+        moveDirection = new Vector3(Input.GetAxis(horizontal)  ,0f, Input.GetAxis(vertical)).normalized;
+        if(horizontal == "Vertical")
+        {
+            moveDirection.z *= -1;
+        }
 
         float actualSpeed = Time.deltaTime * speed;
         rb.MovePosition(transform.position + new Vector3(moveDirection.x * actualSpeed, 0, moveDirection.z * actualSpeed));
@@ -63,6 +80,11 @@ public class S_MovPlayerExpl : MonoBehaviour
     }
     private void Update()
     {
+        if (startCAM)
+        {
+            Camera.main.GetComponent<Transform>().LookAt(transform.position);            
+        }            
+
         if (moveDirection == Vector3.zero && (rb.velocity.x!=0||rb.velocity.z!=0))
         {
             rb.velocity = new(0,rb.velocity.y,0);
@@ -129,6 +151,10 @@ public class S_MovPlayerExpl : MonoBehaviour
         //aplicar rotacion y movimiento
         rb.MoveRotation(rotation);
     }
+    private void LateUpdate()
+    {
+        //startCAM = false;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -138,5 +164,57 @@ public class S_MovPlayerExpl : MonoBehaviour
         {
             canJump = true;
         }*/
+    }
+    /*private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.name.Equals("nivel2parte1"))
+        {
+            Camera.main.GetComponent<S_camara>().transform.LookAt(transform);
+        }
+    }*/
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name.Equals("nivel2parte1"))
+        {
+            uin2p1.SetActive(true);
+
+
+            Camera.main.GetComponent<S_camara>().rotar = true;            
+            float a = Camera.main.GetComponent<S_camara>().offset.x;
+            Camera.main.GetComponent<S_camara>().offset.x = Camera.main.GetComponent<S_camara>().offset.z;
+            Camera.main.GetComponent<S_camara>().offset.z = a;
+            horizontal = "Vertical";
+            vertical = "Horizontal";
+            StartCoroutine(camera3());
+            //Camera.main.GetComponent<Transform>().LookAt(GameObject.Find("Jugador").transform);
+        }
+        if (other.gameObject.name.Equals("nivel2p2"))
+        {
+            ui2p2.SetActive(true);
+        }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name.Equals("nivel2parte1"))
+        {
+            uin2p1.SetActive(false);
+
+            Camera.main.GetComponent<S_camara>().rotar = false;
+            Camera.main.GetComponent<S_camara>().offset = Camera.main.GetComponent<S_camara>().offsetog;
+            horizontal = "Horizontal";
+            vertical = "Vertical";
+            StartCoroutine(camera3());
+            //Camera.main.GetComponent<Transform>().LookAt(GameObject.Find("Jugador").transform);
+        }
+        if (other.gameObject.name.Equals("nivel2p2"))
+        {
+            ui2p2.SetActive(false);
+        }
+    }
+    IEnumerator camera3()
+    {
+        yield return new WaitForSeconds(0.005f);
+        Camera.main.GetComponent<Transform>().LookAt(GameObject.Find("Jugador").transform);
     }
 }
