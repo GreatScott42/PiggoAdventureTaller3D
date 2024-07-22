@@ -7,6 +7,7 @@ public class S_ChangeScene : MonoBehaviour
 {
     [SerializeField] private string sceneName;
     private Transform t;
+    public GameObject transicion;
     private void Awake()
     {
         if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == true)
@@ -41,23 +42,26 @@ public class S_ChangeScene : MonoBehaviour
             {
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().nextEnemy = 1;
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 = true;
-                SceneManager.LoadScene(sceneName);
+                //Debug.Log("KLINGON");
+                StartCoroutine(Fade());
+                //
             }
             else if(gameObject.name == "Enemigo2"&&!GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy2)
             {
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().nextEnemy = 2;
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy2 = true;
-                SceneManager.LoadScene(sceneName);
+                StartCoroutine(Fade());
+                //SceneManager.LoadScene(sceneName);
             }
 
-            if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == true)
+            /*if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == true)
             {
                 Destroy(GameObject.Find("Enemigos"));
             }
             if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy2 == true)
             {
                 Destroy(GameObject.Find("Enemigo2"));
-            }
+            }*/
             //t = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
             //GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().setPos(GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position);
             //GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().setRot(GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().rotation);
@@ -84,4 +88,15 @@ public class S_ChangeScene : MonoBehaviour
             //Destroy(gameObject);
         }
     }
+    IEnumerator Fade()
+    {
+        
+        transicion.SetActive(true);
+        transicion.GetComponent<Animator>().enabled = true;
+        yield return new WaitForSeconds(1.5f);
+        //transicion.GetComponent<Animator>().enabled = false;
+        //transicion.SetActive(false);        
+        SceneManager.LoadScene("Sc_PantallaCombate");
+    }
+
 }

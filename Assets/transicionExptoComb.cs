@@ -63,6 +63,6 @@ public class transicionExptoComb : MonoBehaviour
 
         color.a = endAlpha;
         image.color = color;
-
+        Destroy(gameObject);
     }    
 }

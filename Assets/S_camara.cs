@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class S_camara : MonoBehaviour
 {
@@ -17,6 +18,23 @@ public class S_camara : MonoBehaviour
 
     public bool mirarBomba;
     Vector3 bombapos;
+    /*public static S_camara Instancia;
+
+    private void Awake()
+    {
+        
+        if (Instancia == null)
+        {
+            Instancia = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instancia != this)
+        {
+            Destroy(gameObject);
+        }
+        //DontDestroyOnLoad(this);        
+    }*/
+
     void Start()
     {
         bombapos = GameObject.Find("bomb").transform.position;
