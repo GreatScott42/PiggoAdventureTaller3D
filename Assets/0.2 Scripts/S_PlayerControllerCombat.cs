@@ -20,8 +20,28 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
     private Animator animator;
 
+    bool usingknockback;
+
+    public bool movers;
+
+    GameObject corazon1;
+    GameObject corazon2;
+    GameObject corazon3;
+    GameObject corazon4;
+    GameObject corazon5;
+    GameObject[] corazones;
+
     void Start()
     {
+        usingknockback = false;
+        movers = true;
+        corazon1 = GameObject.Find("heart");
+        corazon2 = GameObject.Find("heart2");
+        corazon3 = GameObject.Find("heart3");
+        corazon4 = GameObject.Find("heart4");
+        corazon5 = GameObject.Find("heart5");
+        corazones = new GameObject[] { corazon1,corazon2,corazon3,corazon4,corazon5};
+
         animator = GameObject.Find("piggoAnim").GetComponent<Animator>();
 
         Debug.Log("enemigos en la escena: "+enemiesTotal);
@@ -46,6 +66,11 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
     private void Movement()
     {
+        Debug.Log(movers);
+        if (!movers)
+        {
+            return;
+        }
         //CODIGO DE MOVIMIENTO DEL PERSONAJE
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized;
         float actualSpeed = Time.deltaTime * stats.speed;
@@ -155,6 +180,50 @@ public class S_PlayerControllerCombat : MonoBehaviour
     IEnumerator espera()
     {
         yield return new WaitForSeconds(1);
+    }
+    public IEnumerator moversagain()
+    {
+        movers = false;
+        yield return new WaitForSeconds(1);
+        movers = true;
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("collider")&&!usingknockback)
+        {
+            
+            if (!usingknockback)
+            {
+                knockback(other.gameObject);
+            }
+        }
+    }
+    void knockback(GameObject collider)
+    {
+        StartCoroutine(knockbackwait());
+        Destroy(corazones[stats.life-1]);
+        
+        stats.life--;
+        Debug.Log(stats.life);
+        Vector3 pushDirection = collider.transform.position - transform.position;
+        pushDirection = pushDirection.normalized;
+        Debug.Log("pushdirection: " + pushDirection);
+        pushDirection.y = -0.5f;
+        //force
+        //ForceMode.Acceleration
+        //ForceMode.Impulse
+        //ForceMode.VelocityChange
+        StartCoroutine(moversagain());
+        //player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        rb.AddForce(-pushDirection * 300f, ForceMode.Force);
+        
+    }
+    IEnumerator knockbackwait()
+    {
+        usingknockback=true;
+        yield return new WaitForSeconds(0.1f);
+        usingknockback = false;
     }
 
     void Update()

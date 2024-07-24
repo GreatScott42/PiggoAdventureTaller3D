@@ -39,6 +39,7 @@ public class ScriptsGlobal : MonoBehaviour
     public int nextEnemy;
 
     public GameObject explosion;
+    public GameObject enemyExplosion;
 
     // evitar duplicaciones
     private void Awake()

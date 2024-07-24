@@ -11,6 +11,8 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     GameObject target;
     Color ogcolor;
 
+    public GameObject explosion;
+
         
     // el temptime se cambio a 3, para que ataque mas seguido
     public float tempTime = 3;
@@ -18,9 +20,12 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     [SerializeField] float JumpForce;
 
     private Animator animator;
+    GameObject attackarea;
 
     private void Start()
     {
+        attackarea = transform.GetChild(0).gameObject;
+
         animator = GameObject.Find("idlerapi").GetComponent<Animator>();
 
         ogcolor = GetComponent<MeshRenderer>().material.color;
@@ -34,18 +39,26 @@ public class S_EnemyBehaviour2 : MonoBehaviour
 
     private void Update()
     {
+        if (stats.life <= 0)
+        {
+            DeadSelf();
+            stats.life = 9999;
+        }
+            
+
         target = GameObject.FindGameObjectWithTag("Player");
         if (temp > 0)
         {
             temp -= Time.deltaTime;
             GetComponent<MeshRenderer>().material.color = ogcolor;
-            
+            //attackarea.SetActive(false);
             transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(new Vector3(target.transform.position.x - transform.position.x, 0, target.transform.position.z - transform.position.z)),1);
         }        
         else
         {
             //stats.speed = stats.speed * -1;                        
             temp = tempTime;
+            //attackarea.SetActive(true);
             //Movement();
             DashAttack();            
         }
@@ -53,13 +66,15 @@ public class S_EnemyBehaviour2 : MonoBehaviour
         {
             GetComponent<MeshRenderer>().material.color = Color.red;
         }
-        if (rb.velocity == Vector3.zero)
+        if (Mathf.Abs(rb.velocity.y) < 0.01f)
         {
             animator.SetBool("attack", false);
+            attackarea.SetActive(false);
         }
         else
         {
             animator.SetBool("attack", true);
+            attackarea.SetActive(true);
         }
     }
 
@@ -78,12 +93,24 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     {
         stats.life -= dmg;
 
-        if (stats.life <= 0)
-            DeadSelf();
+        /*if (stats.life <= 0)
+            DeadSelf();*/
     }
 
     private void DeadSelf()
     {
+        //Instantiate(GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().enemyExplosion, transform.position, Quaternion.identity);
+        Instantiate(explosion,transform.position,Quaternion.identity);
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+        StartCoroutine(dead());
+        //Destroy(gameObject);
+    }
+    IEnumerator dead()
+    {
+        yield return new WaitForSeconds(0.7f);
         Destroy(gameObject);
     }
 

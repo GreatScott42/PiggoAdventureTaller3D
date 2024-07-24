@@ -27,8 +27,18 @@ public class S_EnemyBehaviour1 : MonoBehaviour
 
     private Animator animator;
 
+    private bool moverse;
+    public GameObject explosion;
+    GameObject vida1;
+    GameObject vida2;
+    GameObject vida3;
+
     private void Start()
     {
+        vida1 = transform.GetChild(0).gameObject;
+        vida2 = transform.GetChild(1).gameObject;
+        vida3 = transform.GetChild(2).gameObject;
+        moverse = true;
         animator = GameObject.Find("Animesqueleto").GetComponent<Animator>();
         stats = GetComponent<S_EnemyStats>();
         rb = GetComponent<Rigidbody>();
@@ -42,9 +52,22 @@ public class S_EnemyBehaviour1 : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (stats.life==2)
+        {
+            Destroy(vida3);
+        }else if (stats.life==1)
+        {
+            Destroy(vida2);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.O))
         {
             GetDamage(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            knockback();
         }
 
         if(stats.isAttack)
@@ -61,14 +84,15 @@ public class S_EnemyBehaviour1 : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
+    {        
         distancePlayer = Vector3.Distance(transform.position,player.transform.position);
-        if(!stats.canMove)
+        //Debug.Log(distancePlayer);
+        if (!stats.canMove)
         {
             rb.velocity = Vector3.zero;
         }
-
-        else if(distancePlayer < rangeDamage && stats.canAttack)
+        //PODRIA CAUSAR BUGS ATENTO LOCO&& !stats.isAttack
+        else if (distancePlayer < rangeDamage && stats.canAttack)
         {
             stats.canMove = false;
             StartCoroutine(Attack1Enemy1());
@@ -101,8 +125,14 @@ public class S_EnemyBehaviour1 : MonoBehaviour
 
     private void Movement()
     {
-        Vector3 directionPlayer = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z).normalized;
-        rb.velocity = new Vector3(directionPlayer.x * stats.speed, 0, directionPlayer.z * stats.speed);
+        if (moverse)
+        {
+            Vector3 directionPlayer = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z).normalized;
+            rb.velocity = new Vector3(directionPlayer.x * stats.speed, rb.velocity.y, directionPlayer.z * stats.speed);
+            animator.SetBool("attack", false);
+        }
+        
+        
         /*if (rb.velocity == Vector3.zero)
         {
             animator.SetBool("run",false);
@@ -120,6 +150,7 @@ public class S_EnemyBehaviour1 : MonoBehaviour
             StopAllCoroutines();
 
             stats.life -= dmg;
+            knockback();
             if (stats.life <= 0)
                 DeadSelf();
 
@@ -137,8 +168,42 @@ public class S_EnemyBehaviour1 : MonoBehaviour
 
     }
 
+    void knockback()
+    {
+        Vector3 pushDirection = player.transform.position-transform.position;
+        pushDirection = pushDirection.normalized;
+        Debug.Log("pushdirection: "+pushDirection);
+        pushDirection.y = -0.5f;
+        //force
+        //ForceMode.Acceleration
+        //ForceMode.Impulse
+        //ForceMode.VelocityChange
+        StartCoroutine(moverseagain());
+        rb.AddForce(-pushDirection*500f,ForceMode.Force);
+    }
+
     private void DeadSelf()
     {
+        //Instantiate(GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().enemyExplosion,transform.position,Quaternion.identity);
+        Instantiate(explosion,transform.position,Quaternion.identity);
+        //GetComponent<MeshRenderer>().enabled = false;
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+        //Destroy(gameObject);
+        StartCoroutine(dead());
+    }
+    IEnumerator moverseagain()
+    {
+        moverse = false;
+        yield return new WaitForSeconds(1.5f);
+        moverse = true;
+
+    }
+    IEnumerator dead()
+    {
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 

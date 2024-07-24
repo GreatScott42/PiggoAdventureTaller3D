@@ -10,6 +10,7 @@ TagManager:
   - Waypoint
   - Boss
   - Boton
+  - collider
   layers:
   - Default
   - TransparentFX
