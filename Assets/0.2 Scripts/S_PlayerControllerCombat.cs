@@ -116,7 +116,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
     } 
     IEnumerator Attacking()
     {
-        meshWeapon.enabled = true;
+        //meshWeapon.enabled = true;
         animator.SetBool("attacking", true);
 
         foreach (GameObject t in colWeapon.GetList())
