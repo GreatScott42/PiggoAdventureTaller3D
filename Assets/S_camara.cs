@@ -85,6 +85,7 @@ public class S_camara : MonoBehaviour
     {
         if (mirarBomba)
         {
+            bombapos = GameObject.Find("bomb").transform.position;
             transform.LookAt(bombapos);
             StartCoroutine(mirarB());
             

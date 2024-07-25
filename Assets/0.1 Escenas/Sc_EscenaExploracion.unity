@@ -8927,7 +8927,6 @@ Transform:
   - {fileID: 1173717060}
   - {fileID: 968422869}
   - {fileID: 1285746035}
-  - {fileID: 463216596}
   - {fileID: 1967912044}
   - {fileID: 1342675761}
   - {fileID: 691001563}
@@ -10863,7 +10862,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 381541844}
+    m_TransformParent: {fileID: 2104395032}
     m_Modifications:
     - target: {fileID: 2222111361404534124, guid: 88f2fd29f58b9734683512546acec310, type: 3}
       propertyPath: m_Name
@@ -10871,15 +10870,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2222111361405018444, guid: 88f2fd29f58b9734683512546acec310, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.324576
+      value: 16.824577
       objectReference: {fileID: 0}
     - target: {fileID: 2222111361405018444, guid: 88f2fd29f58b9734683512546acec310, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 39.01018
+      value: -8.289818
       objectReference: {fileID: 0}
     - target: {fileID: 2222111361405018444, guid: 88f2fd29f58b9734683512546acec310, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 181.11813
+      value: 16.71814
       objectReference: {fileID: 0}
     - target: {fileID: 2222111361405018444, guid: 88f2fd29f58b9734683512546acec310, type: 3}
       propertyPath: m_LocalRotation.w
@@ -32818,14 +32817,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261486534}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.75, y: 36.9, z: 112.13}
+  m_LocalRotation: {x: -0, y: -0.9998759, z: -0, w: -0.015754238}
+  m_LocalPosition: {x: 47.76684, y: 2.17, z: -10.033483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 302604406}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -181.805, z: 0}
 --- !u!54 &1261486540
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -53726,6 +53725,7 @@ Transform:
   - {fileID: 7016603922637284744}
   - {fileID: 1977548693}
   - {fileID: 524088979}
+  - {fileID: 463216596}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2104556990

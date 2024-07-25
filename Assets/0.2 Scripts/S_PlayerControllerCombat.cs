@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class S_PlayerControllerCombat : MonoBehaviour
 {
@@ -30,6 +32,9 @@ public class S_PlayerControllerCombat : MonoBehaviour
     GameObject corazon4;
     GameObject corazon5;
     GameObject[] corazones;
+
+    public RawImage fondo;
+    public TextMeshProUGUI text;
 
     void Start()
     {
@@ -199,7 +204,48 @@ public class S_PlayerControllerCombat : MonoBehaviour
             }
         }
     }
-    void knockback(GameObject collider)
+
+    IEnumerator Fade(RawImage image,TextMeshProUGUI image2, float duration)
+    {
+        Color color = image.color;
+        float startAlpha = color.a;
+        float endAlpha = 1f;
+        float elapsed = 0f;
+
+        Color color2 = image2.color;
+        float startAlpha2 = color.a;
+        float endAlpha2 = 1f;
+        float elapsed2 = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
+            image.color = color;            
+            color2.a = Mathf.Lerp(startAlpha2, endAlpha2, elapsed / duration);
+            image2.color = color2;
+            yield return null;
+        }
+
+        color.a = endAlpha;
+        image.color = color;
+        color2.a = endAlpha2;
+        image2.color = color2;
+    }
+    void death()
+    {
+        Time.timeScale = 0.2f;
+        StartCoroutine(Fade(fondo,text,1));
+        StartCoroutine(waits());
+    }
+    IEnumerator waits()
+    {
+        yield return new WaitForSeconds(4);
+        SceneManager.LoadScene("Sc_menuPrincipal");
+        Time.timeScale = 1f;
+    }
+
+        void knockback(GameObject collider)
     {
         StartCoroutine(knockbackwait());
         Destroy(corazones[stats.life-1]);
@@ -229,6 +275,11 @@ public class S_PlayerControllerCombat : MonoBehaviour
     void Update()
     {        
         Attack();
+
+        if (stats.life <= 0)
+        {
+            death();
+        }
 
         if (moveDirection == Vector3.zero)
         {

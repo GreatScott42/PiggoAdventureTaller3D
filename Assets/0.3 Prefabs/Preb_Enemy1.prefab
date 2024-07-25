@@ -251,7 +251,7 @@ MonoBehaviour:
   sensor: {fileID: 79539542595746805}
   attackTime: 1
   invencibleTime: 1
-  rangeDamage: 1
+  rangeDamage: 2
   distancePlayer: 0
   explosion: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
 --- !u!54 &3834501691420010985
