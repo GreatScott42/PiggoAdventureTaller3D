@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.PlayerSettings;
 
 public class S_camara : MonoBehaviour
@@ -18,6 +20,8 @@ public class S_camara : MonoBehaviour
 
     public bool mirarBomba;
     Vector3 bombapos;
+    public GameObject lvl2;
+    bool oncelvl2;
     /*public static S_camara Instancia;
 
     private void Awake()
@@ -37,6 +41,7 @@ public class S_camara : MonoBehaviour
 
     void Start()
     {
+        oncelvl2 = false;
         bombapos = GameObject.Find("bomb").transform.position;
         mirarBomba = false;
         rotar = false;
@@ -74,6 +79,13 @@ public class S_camara : MonoBehaviour
         if (lookp)
         {            
             transform.LookAt(GameObject.Find("target").transform);
+            if (!oncelvl2)
+            {
+                StartCoroutine(Fade(lvl2.GetComponent<TextMeshProUGUI>(), 1));
+                oncelvl2 = true;
+            }
+            
+
         }
         else if (looked)
         {
@@ -81,10 +93,46 @@ public class S_camara : MonoBehaviour
             looked = false;
         }
     }
-    void lookbomb()
+    IEnumerator Fade(TextMeshProUGUI image, float duration)
+    {
+        Color color = image.color;
+        float startAlpha = color.a;
+        float endAlpha = 1f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
+            image.color = color;
+            yield return null;
+        }
+
+        color.a = endAlpha;
+        image.color = color;
+        yield return new WaitForSeconds(1f);
+        color = image.color;
+        startAlpha = color.a;
+        endAlpha = 0f;
+        elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
+            image.color = color;
+            yield return null;
+        }
+
+        color.a = endAlpha;
+        image.color = color;
+        //Destroy(gameObject);
+    }
+        void lookbomb()
     {
         if (mirarBomba)
         {
+            bombapos = GameObject.Find("bomb").transform.position;
             transform.LookAt(bombapos);
             StartCoroutine(mirarB());
             

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class S_PlayerControllerCombat : MonoBehaviour
 {
@@ -20,8 +22,31 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
     private Animator animator;
 
+    bool usingknockback;
+
+    public bool movers;
+
+    GameObject corazon1;
+    GameObject corazon2;
+    GameObject corazon3;
+    GameObject corazon4;
+    GameObject corazon5;
+    GameObject[] corazones;
+
+    public RawImage fondo;
+    public TextMeshProUGUI text;
+
     void Start()
     {
+        usingknockback = false;
+        movers = true;
+        corazon1 = GameObject.Find("heart");
+        corazon2 = GameObject.Find("heart2");
+        corazon3 = GameObject.Find("heart3");
+        corazon4 = GameObject.Find("heart4");
+        corazon5 = GameObject.Find("heart5");
+        corazones = new GameObject[] { corazon1,corazon2,corazon3,corazon4,corazon5};
+
         animator = GameObject.Find("piggoAnim").GetComponent<Animator>();
 
         Debug.Log("enemigos en la escena: "+enemiesTotal);
@@ -46,6 +71,11 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
     private void Movement()
     {
+        Debug.Log(movers);
+        if (!movers)
+        {
+            return;
+        }
         //CODIGO DE MOVIMIENTO DEL PERSONAJE
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized;
         float actualSpeed = Time.deltaTime * stats.speed;
@@ -156,10 +186,100 @@ public class S_PlayerControllerCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
     }
+    public IEnumerator moversagain()
+    {
+        movers = false;
+        yield return new WaitForSeconds(1);
+        movers = true;
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("collider")&&!usingknockback)
+        {
+            
+            if (!usingknockback)
+            {
+                knockback(other.gameObject);
+            }
+        }
+    }
+
+    IEnumerator Fade(RawImage image,TextMeshProUGUI image2, float duration)
+    {
+        Color color = image.color;
+        float startAlpha = color.a;
+        float endAlpha = 1f;
+        float elapsed = 0f;
+
+        Color color2 = image2.color;
+        float startAlpha2 = color.a;
+        float endAlpha2 = 1f;
+        float elapsed2 = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
+            image.color = color;            
+            color2.a = Mathf.Lerp(startAlpha2, endAlpha2, elapsed / duration);
+            image2.color = color2;
+            yield return null;
+        }
+
+        color.a = endAlpha;
+        image.color = color;
+        color2.a = endAlpha2;
+        image2.color = color2;
+    }
+    void death()
+    {
+        Time.timeScale = 0.2f;
+        StartCoroutine(Fade(fondo,text,1));
+        StartCoroutine(waits());
+    }
+    IEnumerator waits()
+    {
+        yield return new WaitForSeconds(4);
+        SceneManager.LoadScene("Sc_menuPrincipal");
+        Time.timeScale = 1f;
+    }
+
+        void knockback(GameObject collider)
+    {
+        StartCoroutine(knockbackwait());
+        Destroy(corazones[stats.life-1]);
+        
+        stats.life--;
+        Debug.Log(stats.life);
+        Vector3 pushDirection = collider.transform.position - transform.position;
+        pushDirection = pushDirection.normalized;
+        Debug.Log("pushdirection: " + pushDirection);
+        pushDirection.y = -0.5f;
+        //force
+        //ForceMode.Acceleration
+        //ForceMode.Impulse
+        //ForceMode.VelocityChange
+        StartCoroutine(moversagain());
+        //player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        rb.AddForce(-pushDirection * 300f, ForceMode.Force);
+        
+    }
+    IEnumerator knockbackwait()
+    {
+        usingknockback=true;
+        yield return new WaitForSeconds(0.1f);
+        usingknockback = false;
+    }
 
     void Update()
     {        
         Attack();
+
+        if (stats.life <= 0)
+        {
+            death();
+        }
 
         if (moveDirection == Vector3.zero)
         {
