@@ -13,7 +13,7 @@ public class Coin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Sumar puntos al jugador
-            GameManager.instance.AgregarPuntos(puntos);
+            //GameManager.instance.AgregarPuntos(puntos);
 
             // Desactivar la moneda 
             gameObject.SetActive(false); // Desactivar el objeto
