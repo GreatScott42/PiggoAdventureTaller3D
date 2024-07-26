@@ -8,10 +8,10 @@ public class S_BossBehavior : MonoBehaviour
     public Transform[] waypoints;
     public GameObject enemy1Prefab;
     public GameObject enemy2Prefab;
-    private GameObject currentEnemy;
-    private int currentWaypoint;
-    private int wave;
-    private int totalEnemies;
+    public GameObject currentEnemy;
+    public int currentWaypoint;
+    public int wave;
+    public int totalEnemies;
 
     void Start()
     {
@@ -22,6 +22,7 @@ public class S_BossBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.LookAt(GameObject.Find("Jugador").transform);
         totalEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (wave == 1)
         {
