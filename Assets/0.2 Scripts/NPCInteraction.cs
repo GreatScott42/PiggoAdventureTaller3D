@@ -10,6 +10,7 @@ public class NPCInteraction : MonoBehaviour
 
     private Transform playerTransform;
     private bool isDialogueActive = false; // Para verificar si el diálogo está activo
+    public GameObject canvaspresionz;
 
     private void Start()
     {
@@ -22,8 +23,10 @@ public class NPCInteraction : MonoBehaviour
         // Verifica la distancia entre el jugador y el NPC
         if (Vector3.Distance(playerTransform.position, transform.position) <= interactionDistance)
         {
+            canvaspresionz.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Z))
             {
+                
                 if (isDialogueActive)
                 {
                     // Ocultar el diálogo si ya está activo
@@ -45,9 +48,14 @@ public class NPCInteraction : MonoBehaviour
         }
         else if (isDialogueActive)
         {
-            // Ocultar el diálogo si el jugador se aleja del NPC
+            // Ocultar el diálogo si el jugador se aleja del NPC            
             dialogueUI.HideDialogue();
             isDialogueActive = false;
         }
+        else
+        {
+            canvaspresionz.SetActive(false);
+        }
+        
     }
 }

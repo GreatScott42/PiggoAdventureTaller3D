@@ -100,6 +100,8 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     private void DeadSelf()
     {
         //Instantiate(GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().enemyExplosion, transform.position, Quaternion.identity);
+        GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().explosionsound;
+        GetComponent<AudioSource>().Play();
         Instantiate(explosion,transform.position,Quaternion.identity);
         for (int i = 0; i < transform.childCount; ++i)
         {
@@ -110,7 +112,7 @@ public class S_EnemyBehaviour2 : MonoBehaviour
     }
     IEnumerator dead()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 

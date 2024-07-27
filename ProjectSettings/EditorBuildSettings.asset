@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/0.1 Escenas/Sc_Creditos.unity
     guid: 3a25b466e4d571a44954392ff08ef136
+  - enabled: 1
+    path: Assets/0.1 Escenas/Sc_Boss.unity
+    guid: b4ca41dccb359e34489a963261830d97
   m_configObjects: {}

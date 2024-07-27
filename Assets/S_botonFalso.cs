@@ -20,7 +20,8 @@ public class S_botonFalso : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            
+            GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().buttonsound;
+            GetComponent<AudioSource>().Play();
             foreach (GameObject a in GameObject.FindGameObjectsWithTag("Boton"))
             {
                 a.GetComponent<MeshRenderer>().material.color = Color.red;

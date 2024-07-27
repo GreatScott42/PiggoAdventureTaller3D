@@ -6,23 +6,28 @@ public class S_llavecomportamiento : MonoBehaviour
 {
     public GameObject Objetollave;
     public GameObject ColliderPuerta;
+    AudioSource coinsound;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            coinsound.Play();
+            GetComponent<MeshRenderer>().enabled = false;
             ColliderPuerta.gameObject.SetActive(false);
             GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().usedKey = true;
-            Destroy(Objetollave);
+            StartCoroutine(waitte());
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        coinsound = GetComponent<AudioSource>();
         //por si ya se uso la llave antes del combate
         if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().usedKey == true)
         {
+            
             ColliderPuerta.gameObject.SetActive(false);
             Destroy(Objetollave);
         }
@@ -32,5 +37,10 @@ public class S_llavecomportamiento : MonoBehaviour
     void Update()
     {
         
+    }
+    IEnumerator waitte()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(Objetollave);
     }
 }

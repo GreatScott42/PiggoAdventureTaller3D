@@ -247,6 +247,8 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
         void knockback(GameObject collider)
     {
+        GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().golpeado;
+        GetComponent<AudioSource>().Play();
         StartCoroutine(knockbackwait());
         Destroy(corazones[stats.life-1]);
         

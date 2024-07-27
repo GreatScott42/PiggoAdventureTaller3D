@@ -15,10 +15,20 @@ public class Coin : MonoBehaviour
             // Sumar puntos al jugador
             //GameManager.instance.AgregarPuntos(puntos);
 
+            PlayerPrefs.SetInt("coins",(PlayerPrefs.GetInt("coins",0)+100));
+            GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().moneda;
+            GetComponent<AudioSource>().Play();
             // Desactivar la moneda 
-            gameObject.SetActive(false); // Desactivar el objeto
+            StartCoroutine(daed());
+            
 
         }
+    }
+
+    IEnumerator daed()
+    {
+        yield return new WaitForSeconds(0.2f);
+        gameObject.SetActive(false); // Desactivar el objeto
     }
 }
 

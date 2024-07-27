@@ -178,6 +178,9 @@ public class S_EnemyBehaviour1 : MonoBehaviour
         //ForceMode.Acceleration
         //ForceMode.Impulse
         //ForceMode.VelocityChange
+        GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().golpear;
+        GetComponent<AudioSource>().Play();
+        
         StartCoroutine(moverseagain());
         rb.AddForce(-pushDirection*500f,ForceMode.Force);
     }
@@ -185,6 +188,8 @@ public class S_EnemyBehaviour1 : MonoBehaviour
     private void DeadSelf()
     {
         //Instantiate(GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().enemyExplosion,transform.position,Quaternion.identity);
+        GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().explosionsound;
+        GetComponent<AudioSource>().Play();
         Instantiate(explosion,transform.position,Quaternion.identity);
         //GetComponent<MeshRenderer>().enabled = false;
         for (int i = 0; i < transform.childCount; ++i)
@@ -198,6 +203,9 @@ public class S_EnemyBehaviour1 : MonoBehaviour
     {
         moverse = false;
         yield return new WaitForSeconds(1.5f);
+        GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().esqueleto;
+        GetComponent <AudioSource>().loop = true;
+        GetComponent<AudioSource>().Play();
         moverse = true;
 
     }

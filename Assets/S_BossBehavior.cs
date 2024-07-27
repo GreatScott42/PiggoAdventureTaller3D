@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class S_BossBehavior : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class S_BossBehavior : MonoBehaviour
     public int currentWaypoint;
     public int wave;
     public int totalEnemies;
-
+    bool playonce;
+    public GameObject explosion;
     void Start()
     {
+        playonce = false;
         wave = 1;
         currentWaypoint = 0;
     }
@@ -22,25 +25,42 @@ public class S_BossBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!playonce)
+        {
+            GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().jefe;
+            GetComponent<AudioSource>().Play();
+            playonce = true;
+        }
         transform.LookAt(GameObject.Find("Jugador").transform);
         totalEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if (wave == 1)
-        {
+        {            
             currentEnemy = enemy1Prefab;
             spawnMinions();
         }else if (wave==2)
         {
-            currentEnemy=enemy2Prefab;
+           
+            currentEnemy = enemy2Prefab;
             spawnMinions();
         }
 
         if (totalEnemies == 0 && wave == 1 && currentWaypoint >= 2)
         {
+            playonce = false;
             wave = 2;
             currentWaypoint = 0;
         }
+        //muerte jefe
+        if (totalEnemies == 0 && wave == 2 && currentWaypoint >= 2)
+        {
+            GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().explosionsound;
+            GetComponent<AudioSource>().Play();
+            //transform.localScale *= 6;
+            Instantiate(explosion, transform);
+            StartCoroutine(dead());
+        }
 
-        
+
     }
 
     void spawnMinions()
@@ -50,6 +70,13 @@ public class S_BossBehavior : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position,5f*Time.deltaTime);
         }
+    }
+    IEnumerator dead()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("Sc_Creditos");
+        Destroy(gameObject);
+
     }
 
     private void OnTriggerEnter(Collider other)

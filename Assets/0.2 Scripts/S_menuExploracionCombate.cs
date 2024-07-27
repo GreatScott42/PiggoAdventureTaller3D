@@ -74,7 +74,7 @@ public class S_menuExploracionCombate : MonoBehaviour
             StartCoroutine(espera());
             if(GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().nextEnemy == 2)
             {
-                SceneManager.LoadScene("Sc_Creditos");
+                SceneManager.LoadScene("Sc_EscenaExploracion");
                 return;
             }
             SceneManager.LoadScene("Sc_EscenaExploracion");

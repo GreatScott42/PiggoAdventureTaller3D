@@ -43,15 +43,21 @@ public class S_ChangeScene : MonoBehaviour
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().nextEnemy = 1;
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 = true;
                 //Debug.Log("KLINGON");
-                StartCoroutine(Fade());
+                StartCoroutine(Fade(0));
                 //
             }
             else if(gameObject.name == "Enemigo2"&&!GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy2)
             {
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().nextEnemy = 2;
                 GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy2 = true;
-                StartCoroutine(Fade());
+                StartCoroutine(Fade(0));
                 //SceneManager.LoadScene(sceneName);
+            }else if(gameObject.name == "boss")
+            {
+                GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().nextEnemy = 0;
+                GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().jefe;
+                GetComponent<AudioSource>().Play();
+                StartCoroutine(Fade(1));
             }
 
             /*if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1 == true)
@@ -88,15 +94,24 @@ public class S_ChangeScene : MonoBehaviour
             //Destroy(gameObject);
         }
     }
-    IEnumerator Fade()
+    IEnumerator Fade(int boss)
     {
         
         transicion.SetActive(true);
         transicion.GetComponent<Animator>().enabled = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         //transicion.GetComponent<Animator>().enabled = false;
         //transicion.SetActive(false);        
-        SceneManager.LoadScene("Sc_PantallaCombate");
+        if (boss == 1)
+        {
+            SceneManager.LoadScene("Sc_Boss");
+
+        }
+        else
+        {
+            SceneManager.LoadScene("Sc_PantallaCombate");
+        }
+        
     }
 
 }

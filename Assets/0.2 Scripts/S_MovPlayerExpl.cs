@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class S_MovPlayerExpl : MonoBehaviour
 {
     public float speed = 1.0f;
     public float jumpForce = 1.0f;
+    public TextMeshProUGUI coins;
 
     //El personaje puede Saltar
     [SerializeField] private bool canJump = false;
@@ -29,9 +32,12 @@ public class S_MovPlayerExpl : MonoBehaviour
 
     public GameObject uin2p1;
     public GameObject ui2p2;
+
+    AudioSource walksound;
     // Start is called before the first frame update
     void Start()
     {
+        walksound = GetComponent<AudioSource>();
         startCAM = false;
         //for (int i = 0; i < 10; i++) { Camera.main.GetComponent<Transform>().LookAt(transform); }
         
@@ -80,6 +86,7 @@ public class S_MovPlayerExpl : MonoBehaviour
     }
     private void Update()
     {
+        coins.text = "Monedas: "+PlayerPrefs.GetInt("coins",0);
         if (startCAM)
         {
             Camera.main.GetComponent<Transform>().LookAt(transform.position);            
@@ -100,9 +107,11 @@ public class S_MovPlayerExpl : MonoBehaviour
         if (moveDirection==Vector3.zero)
         {
             animator.SetBool("running",false);
-        }else
+            walksound.Play();
+        }
+        else
         {
-            animator.SetBool("running", true);
+            animator.SetBool("running", true);            
         }
         
 

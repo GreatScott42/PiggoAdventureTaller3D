@@ -42,7 +42,8 @@ public class S_botonPared : MonoBehaviour
                 return;
             }
             GetComponent<MeshRenderer>().material.color = Color.yellow;
-
+            GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().buttonsound;
+            GetComponent<AudioSource>().Play();
             GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().botonesCorrectosApretados++;
         }
     }
@@ -62,7 +63,8 @@ public class S_botonPared : MonoBehaviour
         Destroy(GameObject.Find("crate"));
         Destroy(GameObject.Find("crate2"));
         Destroy(GameObject.Find("crate3"));
-
+        GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().explosionsound;
+        GetComponent<AudioSource>().Play();
         Instantiate(explosion, GameObject.Find("bomb").transform.position, Quaternion.identity);
         Destroy(GameObject.Find("bomb"));
     }

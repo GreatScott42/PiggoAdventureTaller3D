@@ -41,6 +41,14 @@ public class ScriptsGlobal : MonoBehaviour
     public GameObject explosion;
     public GameObject enemyExplosion;
 
+    public AudioClip buttonsound;
+    public AudioClip explosionsound;
+    public AudioClip golpear;
+    public AudioClip golpeado;
+    public AudioClip esqueleto;
+    public AudioClip jefe;
+    public AudioClip moneda;
+
     // evitar duplicaciones
     private void Awake()
     {

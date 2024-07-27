@@ -13,6 +13,8 @@ public class NPC2Interaction : MonoBehaviour
     private bool isDialogueActive = false;
     private bool hasShownInitialDialogue = false; // Para saber si el primer diálogo ya se mostró
 
+    public GameObject canvaspresionz;
+
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -40,8 +42,10 @@ public class NPC2Interaction : MonoBehaviour
 
         if (distanceToPlayer <= interactionDistance)
         {
+            canvaspresionz.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Z))
             {
+                
                 if (isDialogueActive)
                 {
                     // Ocultar el diálogo si el primer diálogo ya se mostró
@@ -67,7 +71,12 @@ public class NPC2Interaction : MonoBehaviour
         {
             // Ocultar el diálogo si el jugador se aleja
             dialogueUI.HideDialogue();
+            
             isDialogueActive = false;
+        }
+        else
+        {
+            canvaspresionz.SetActive(false);
         }
     }
 }
