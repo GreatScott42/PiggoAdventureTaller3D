@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Ground
+  - Weapon
+  - Waypoint
+  - Boss
+  - Boton
+  - collider
   layers:
   - Default
   - TransparentFX
