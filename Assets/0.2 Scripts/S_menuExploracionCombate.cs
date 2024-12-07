@@ -10,10 +10,16 @@ public class S_menuExploracionCombate : MonoBehaviour
     //menu exploracion y combate
     public Button botonContinuar;
     public Button botonMenu;
+    public Button opciones;
+    public Button opciones2;
+
     public GameObject canvas;
 
     public GameObject prefab1;
     public GameObject prefab2;
+
+    public Camera cam1;
+    public Camera cam2;
 
     int enemiesTotal;
     bool changescene;
@@ -31,6 +37,8 @@ public class S_menuExploracionCombate : MonoBehaviour
         changescene = false;
         botonContinuar.onClick.AddListener(continuar);
         botonMenu.onClick.AddListener(menu);
+        //opciones.onClick.AddListener(S_menuPrincipal);
+        //opciones2.onClick.AddListener(opcion2);
         if (prefab1 == null || prefab2 == null)
             return;
         if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().nextEnemy==1)
@@ -43,7 +51,19 @@ public class S_menuExploracionCombate : MonoBehaviour
             changescene = true;
         }
     }
-
+    void opcion()
+    {
+        //SceneManager.LoadScene("opciones");
+        cam1.gameObject.SetActive(false);
+        cam2.gameObject.SetActive(true);
+        canvas.SetActive(false);
+    }
+    void opcion2()
+    {
+        cam2.gameObject.SetActive(false);
+        cam1.gameObject.SetActive(true);
+        canvas.SetActive(true);
+    }
     // Update is called once per frame
     void Update()
     {

@@ -25,6 +25,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
     bool usingknockback;
 
     public bool movers;
+    public GameObject explosion;
 
     GameObject corazon1;
     GameObject corazon2;
@@ -130,7 +131,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
 
     private void Attack()
     {
-        if(Input.GetKeyDown(KeyCode.J) && stats.canAttack)
+        if(Input.GetKeyDown(ScriptsGlobal.ataquetecla) && stats.canAttack)
         {
             StartCoroutine(Attacking());
         }
@@ -251,7 +252,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
         GetComponent<AudioSource>().Play();
         StartCoroutine(knockbackwait());
         Destroy(corazones[stats.life-1]);
-        
+        Instantiate(explosion, corazones[stats.life-1].transform.position, Quaternion.identity);
         stats.life--;
         Debug.Log(stats.life);
         Vector3 pushDirection = collider.transform.position - transform.position;

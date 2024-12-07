@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20583034, g: 0.63699585, b: 0.8323583, a: 1}
+  m_IndirectSpecularColor: {r: 0.13538305, g: 0.42225316, b: 0.5543494, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2429,7 +2429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1214881776194502842, guid: 623f620611db1a2498bd3394b313e041, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.37810898
+      value: 0.3781128
       objectReference: {fileID: 0}
     - target: {fileID: 1214881776194502842, guid: 623f620611db1a2498bd3394b313e041, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2478,6 +2478,14 @@ PrefabInstance:
     - target: {fileID: 3203790422416634191, guid: 623f620611db1a2498bd3394b313e041, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219078095831168380, guid: 623f620611db1a2498bd3394b313e041, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.50006104
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219078095831168380, guid: 623f620611db1a2498bd3394b313e041, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.49993896
       objectReference: {fileID: 0}
     - target: {fileID: 6169386225150873244, guid: 623f620611db1a2498bd3394b313e041, type: 3}
       propertyPath: m_Type
@@ -2625,7 +2633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8773323450506561835, guid: 623f620611db1a2498bd3394b313e041, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.79999924
+      value: 0.80000305
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -4684,6 +4692,10 @@ PrefabInstance:
       propertyPath: movers
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3937309109755644286, guid: 6cdcb9594ad6e0e45bd1b7c320176c56, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
     - target: {fileID: 4533151690550108184, guid: 6cdcb9594ad6e0e45bd1b7c320176c56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.14
@@ -4768,7 +4780,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.52
   m_Pitch: 1
   Loop: 0
   Mute: 0

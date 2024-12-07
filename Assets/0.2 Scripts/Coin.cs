@@ -5,7 +5,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     // Puntos que se sumarán al recolectar la moneda
-    public int puntos = 100;
+    public int puntos = 1;
 
     // Método que se llama cuando un objeto colisiona con la moneda
     private void OnTriggerEnter(Collider other)
@@ -15,7 +15,7 @@ public class Coin : MonoBehaviour
             // Sumar puntos al jugador
             //GameManager.instance.AgregarPuntos(puntos);
 
-            PlayerPrefs.SetInt("coins",(PlayerPrefs.GetInt("coins",0)+100));
+            PlayerPrefs.SetInt("coins",(PlayerPrefs.GetInt("coins",0)+1));
             GetComponent<AudioSource>().clip = GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().moneda;
             GetComponent<AudioSource>().Play();
             // Desactivar la moneda 

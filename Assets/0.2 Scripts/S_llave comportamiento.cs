@@ -17,6 +17,7 @@ public class S_llavecomportamiento : MonoBehaviour
             ColliderPuerta.gameObject.SetActive(false);
             GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().usedKey = true;
             StartCoroutine(waitte());
+            keyui.cooins++;
         }
     }
 

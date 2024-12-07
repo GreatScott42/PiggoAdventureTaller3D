@@ -86,7 +86,7 @@ public class S_MovPlayerExpl : MonoBehaviour
     }
     private void Update()
     {
-        coins.text = "Monedas: "+PlayerPrefs.GetInt("coins",0);
+        coins.text = ""+PlayerPrefs.GetInt("coins",0);
         if (startCAM)
         {
             Camera.main.GetComponent<Transform>().LookAt(transform.position);            
@@ -187,7 +187,7 @@ public class S_MovPlayerExpl : MonoBehaviour
         {
             uin2p1.SetActive(true);
 
-
+            return;
             Camera.main.GetComponent<S_camara>().rotar = true;            
             float a = Camera.main.GetComponent<S_camara>().offset.x;
             Camera.main.GetComponent<S_camara>().offset.x = Camera.main.GetComponent<S_camara>().offset.z;
@@ -208,7 +208,7 @@ public class S_MovPlayerExpl : MonoBehaviour
         if (other.gameObject.name.Equals("nivel2parte1"))
         {
             uin2p1.SetActive(false);
-
+            return;
             Camera.main.GetComponent<S_camara>().rotar = false;
             Camera.main.GetComponent<S_camara>().offset = Camera.main.GetComponent<S_camara>().offsetog;
             horizontal = "Horizontal";

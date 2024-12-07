@@ -16,6 +16,11 @@ public class ScriptsGlobal : MonoBehaviour
     // pos del jugador
     public Vector3 pos;
     public Quaternion rot;
+    public static KeyCode ataquetecla;
+    //public KeyCode adelante;
+    //public KeyCode atras;
+    //public KeyCode isquierda;
+    //public KeyCode derecha;
     // para que no se duplique al recargar la primera escena
     public static ScriptsGlobal Instancia;
     // bools para eliminar enemigo y la puerta una vez se gane al enemigo
@@ -52,7 +57,7 @@ public class ScriptsGlobal : MonoBehaviour
     // evitar duplicaciones
     private void Awake()
     {
-
+        ataquetecla = KeyCode.J;
         checkpointPos = pos;
         if (Instancia == null)
         {

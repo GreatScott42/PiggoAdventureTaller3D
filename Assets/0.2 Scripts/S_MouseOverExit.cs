@@ -23,14 +23,16 @@ public class S_MouseOverExit : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         //gameObject.GetComponentInChildren<TextMeshPro>().color = Color.white;
         gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-        gameObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.localScale = new Vector3(2, 2, 2);
+        //gameObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.localScale = new Vector3(1.5f, 1.5f, 2);
+        gameObject.GetComponent<RectTransform>().localScale = new Vector3(1.5f, 1.5f, 1);
         //throw new System.NotImplementedException();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-        gameObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.localScale = new Vector3(1f, 1f, 1f);
+        //gameObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.localScale = new Vector3(1f, 1f, 1f);
+        gameObject.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
         //throw new System.NotImplementedException();
     }
 }
