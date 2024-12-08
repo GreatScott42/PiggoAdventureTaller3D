@@ -252,6 +252,7 @@ public class S_PlayerControllerCombat : MonoBehaviour
         GetComponent<AudioSource>().Play();
         StartCoroutine(knockbackwait());
         Destroy(corazones[stats.life-1]);
+        explosion.transform.localScale = new Vector3(0.3f,0.3f,0.3f);
         Instantiate(explosion, corazones[stats.life-1].transform.position, Quaternion.identity);
         stats.life--;
         Debug.Log(stats.life);

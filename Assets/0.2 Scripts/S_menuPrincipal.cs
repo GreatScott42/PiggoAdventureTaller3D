@@ -31,6 +31,7 @@ public class S_menuPrincipal : MonoBehaviour
     public SaveFileSetup saveFileSetup;
 
     public GameObject canvas6;
+    public GameObject canvasseguro;
 
     //menu exploracion y combate
     // Start is called before the first frame update
@@ -86,6 +87,10 @@ public class S_menuPrincipal : MonoBehaviour
             botonOpciones = GameObject.Find("botonopciones").GetComponent<Button>();
             botonOpciones.onClick.AddListener(opciones);
         }
+        if (!SceneManager.GetActiveScene().Equals("S_menuPrincipal"))
+        {
+            GetComponent<AudioSource>().Stop();
+        }
     }
 
     void jugar()
@@ -113,7 +118,9 @@ public class S_menuPrincipal : MonoBehaviour
     }
     void salir()
     {
-        Application.Quit();
+        //Application.Quit();
+        //abrir seguro
+        canvasseguro.SetActive(true);
     }
     void creditos()
     {

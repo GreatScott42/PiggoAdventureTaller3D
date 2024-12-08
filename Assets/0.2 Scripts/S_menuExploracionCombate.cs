@@ -24,6 +24,8 @@ public class S_menuExploracionCombate : MonoBehaviour
     int enemiesTotal;
     bool changescene;
 
+    public static GameObject canvasseguro;
+
     float timeScale;
     //public GameObject canvas;
     
@@ -32,6 +34,10 @@ public class S_menuExploracionCombate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Transform padre = GameObject.Find("seguro").transform;
+        Transform hijoDesactivado = padre.Find("segurosalir");
+        canvasseguro = hijoDesactivado.gameObject;
+        //canvasseguro = GameObject.Find("seguro").transform.Find("segurosalir");
         timeScale = Time.timeScale;
 
         changescene = false;
@@ -70,8 +76,11 @@ public class S_menuExploracionCombate : MonoBehaviour
         if (changescene)
         {
             CombToExpl();
-        }       
-
+        }
+        /*if (canvasseguro==null)
+        {
+            canvasseguro = S_menuPrincipal.canvasseguro;
+        }*/
     }
     void continuar()
     {
@@ -80,6 +89,9 @@ public class S_menuExploracionCombate : MonoBehaviour
     }
     void menu()
     {
+        //
+        canvasseguro.SetActive(true);
+        return;
         canvas.SetActive(false);
         Time.timeScale = 1.0f;        
         
