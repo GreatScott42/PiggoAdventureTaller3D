@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class S_camara : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class S_camara : MonoBehaviour
     public bool mirarBomba;
     Vector3 bombapos;
     public GameObject lvl2;
+    public GameObject fondo;
+    public Canvas monedas;
     bool oncelvl2;
     /*public static S_camara Instancia;
 
@@ -44,6 +47,7 @@ public class S_camara : MonoBehaviour
         rotar = false;
         looked = true;
         lk = Vector3.zero;
+        
         lookp = false;
         if (GameObject.Find("ScriptsGlobal").GetComponent<ScriptsGlobal>().destroyEnemy1)
         {
@@ -79,6 +83,8 @@ public class S_camara : MonoBehaviour
             if (!oncelvl2)
             {
                 StartCoroutine(Fade(lvl2.GetComponent<TextMeshProUGUI>(), 1));
+                fondo.GetComponent<Image>().color=new Color(fondo.GetComponent<Image>().color.r, fondo.GetComponent<Image>().color.g, fondo.GetComponent<Image>().color.b, 1);
+                monedas.gameObject.SetActive(false);
                 oncelvl2 = true;
             }
             
@@ -123,6 +129,8 @@ public class S_camara : MonoBehaviour
 
         color.a = endAlpha;
         image.color = color;
+        fondo.GetComponent<Image>().color = new Color(fondo.GetComponent<Image>().color.r, fondo.GetComponent<Image>().color.g, fondo.GetComponent<Image>().color.b, 0);
+        monedas.gameObject.SetActive(true);
         //Destroy(gameObject);
     }
         void lookbomb()
